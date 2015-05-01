@@ -19,7 +19,7 @@
 		<meta name="author" content="d4rk">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Apple Device specific tags -->
-		<meta name="apple-mobile-web-app-title" content="scynet">
+		<meta name="apple-mobile-web-app-title" content="Network-Status">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<!-- Le styles -->

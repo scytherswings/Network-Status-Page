@@ -65,3 +65,8 @@ Designed to monitor a local server and network with forecast.io, Plex, and pfSen
 
 [sab]: http://sabnzbd.org
 [pfs]: http://www.pfsense.org
+
+
+###Configuration
+---------------
+* To configure the location of your config.ini script, edit the path to the directory of the config.ini file that is set in /assets/php/functions.php

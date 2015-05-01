@@ -344,7 +344,8 @@ function getNetwork()
 	global $plex_server_ip;
 
 	$clientIP = get_client_ip();
-	if($clientIP=='10.0.1.1'):
+	preg_match('/(^127\.0\.0\.1)| (^10\.)| (^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)| (^192\.168\.)/', $inPrivateSpace)
+	if($inPrivateSpace):
 		$network='http://'.$plex_server_ip;
 	else:
 		$network='http://'.$wan_domain;

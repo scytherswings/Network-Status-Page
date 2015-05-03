@@ -18,20 +18,24 @@ $local_pfsense_ip = $config['pfSense']['local_ip'];
 $local_server_ip = $config['network_details']['local_server_ip'];
 $pfSense_username = $config['pfSesnse']['username'];
 $pfSense_password = $config['pfSense']['password'];
+$pfSense_URL = $config['pfSense']['URL'];
 // Network Details
 $wan_domain = $config['network_details']['wan_domain'];
 $wan1_ip = $config['wan1_ip'];
 $wan2_ip = $config['wan2_ip'];
 $ping_ip = $config['ping_ip'];
+
 // plex
 $plex_server_ip = $config['plex']['local_ip'];
 $plex_port = $config['plex']['local_port'];
 $plex_username = $config['plex']['username'];
 $plex_password = $config['plex']['password'];
+$plex_URL = $config['plex']['URL'];
 
 // SABnzbd+
 $sab_ip = $config['sabnzbd']['local_ip'];
 $sab_port = $config['sabnzbd']['local_port'];
+$sab_URL = $config['sabnzbd']['URL'];
 $sabnzbd_api = $config['sabnzbd']['api'];
 $ping_throttle = $config['sabnzbd']['ping_throttle'];
 $sabSpeedLimitMax = $config['sabnzbd']['sabSpeedLimitMax'];

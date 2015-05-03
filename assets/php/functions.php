@@ -6,7 +6,11 @@ Ini_Set( 'display_errors', false);
 include '../../init.php';
 include 'lib/phpseclib0.3.5/Net/SSH2.php';
 require_once 'MinecraftServerStatus.class.php';
+#$config = parse_ini_file($config_path, true);
 $config = parse_ini_file($config_path);
+#foreach ($config as $section) {
+#	echo "<p>$section</p>";
+#}
 
 // Import variables from config file
 // Network Details
@@ -52,10 +56,9 @@ if (file_exists($plexTokenCache) && (filemtime($plexTokenCache) > (time() - 60 *
 }
 
 // Calculate server load
-if (strpos(strtolower(PHP_OS), "Darwin") === false)
-	$loads = sys_getloadavg();
-else
-	$loads = Array(0.55,0.7,1);
+$loads = sys_getloadavg();
+#else
+#	$loads = Array(0.55,0.7,1);
 
 // Set the total disk space
 $ereborTotalSpace = 8.961019766e+12; // This is in bytes
@@ -215,7 +218,7 @@ function getDiskspaceTV2($dir)
 function getLoad($id)
 {
 	global $cpu_cores;
-	return 100 * ($GLOBALS['loads'][$id] / $cpu_cores);
+	return 100 * ($GLOBALS["loads"][$id] / $cpu_cores);
 }
 
 function printBar($value, $name = "")

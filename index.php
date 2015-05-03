@@ -9,8 +9,6 @@
 
 	$detect = new Mobile_Detect;
 
-#	echo "client IP: ".$clientIP;
-
 ?>
 <html lang="en">
 	<head>

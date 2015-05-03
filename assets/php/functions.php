@@ -322,7 +322,7 @@ function ping()
 	$clientIP = get_client_ip();
 	//$pingIP = '8.8.8.8';
 	if($clientIP != $local_pfsense_ip) {
-		$pingIP = $clientIP;
+		$ping_ip = $clientIP;
 	}
 	$terminal_output = shell_exec('ping -c 5 -q '.$ping_ip);
 	// If using something besides OS X you might want to customize the following variables for proper output of average ping.
@@ -342,12 +342,12 @@ function ping()
 function getNetwork()
 {
 	// It should be noted that this function is designed specifically for getting the local / wan name for Plex.
-	global $local_pfsense_ip;
 	global $wan_domain;
 	global $plex_server_ip;
+    global $isRFCSpace;
 
-	$clientIP = get_client_ip();
-	if(preg_match('/(^127\.0\.0\.1)| (^10\.)| (^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)| (^192\.168\.)/')):
+    $isRFCSpace = preg_match("(^127\.0\.0\.1)| (^10\.)| (^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)| (^192\.168\.)", get_client_ip());
+	if($isRFCSpace):
 		$network='http://'.$plex_server_ip;
 	else:
 		$network='http://'.$wan_domain;
@@ -398,10 +398,10 @@ function sabSpeedAdjuster()
 				else:
 					echo 'Ping is over '.$ping_throttle.' but SAB cannot slow down anymore';
 				endif;	
-			elseif (($avgPing + 9) < $ping_throttle):
+			elseif (($avgPing . 9) < $ping_throttle):
 				if ($sabSpeedLimitCurrent < $sabSpeedLimitMax):
 					// Increase speed by 256KBps
-					echo 'SAB is downloading and ping is '.($avgPing + 9).'  so increasing download speed.';
+					echo 'SAB is downloading and ping is '.($avgPing . 9).'  so increasing download speed.';
 					$sabSpeedLimitSet = $sabSpeedLimitCurrent + 256;
 					shell_exec('curl "http://'.$sab_ip.':'.$sab_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
 				else:
@@ -466,7 +466,6 @@ function makeRecenlyReleased()
 	// Various items are commented out as I was playing with what information to include.
 	global $plex_port;
 	$network = getNetwork();
-	$clientIP = get_client_ip();
 	$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/7/newest');
 	
 	//echo '<div class="col-md-10 col-sm-offset-1">';
@@ -659,6 +658,7 @@ function getTranscodeSessions()
 		endforeach;
 		return $transcodeSessions;
 	endif;
+    return 0;
 }
 
 function makeBandwidthBars($interface)
@@ -785,7 +785,7 @@ function limitWords($string, $word_limit)
     return implode(" ",array_splice($words,0,$word_limit));
 }
 
-function getDir($b)
+function getWindDir($b)
 {
    $dirs = array('N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N');
    return $dirs[round($b/45)];
@@ -860,7 +860,7 @@ function makeWeatherSidebar()
 	echo '</ul></li>';
 	echo '</ul>';
 	if ($currentWindSpeed > 0) {
-		$direction = getDir($currentWindBearing);
+		$direction = getWindDir($currentWindBearing);
 		echo '<h4 class="exoextralight" style="margin-top:0px">Wind: '.$currentWindSpeed.' mph from the '.$direction.'</h4>';
 	} else {
 		echo '<h4 class="exoextralight" style="margin-top:0px">Wind: Calm</h4>';

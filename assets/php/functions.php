@@ -6,43 +6,52 @@ Ini_Set( 'display_errors', false);
 include '../../init.php';
 include 'lib/phpseclib0.3.5/Net/SSH2.php';
 require_once 'MinecraftServerStatus.class.php';
-#$config = parse_ini_file($config_path, true);
-$config = parse_ini_file($config_path);
+$config = parse_ini_file($config_path, true);
+#$config = parse_ini_file($config_path);
 #foreach ($config as $section) {
 #	echo "<p>$section</p>";
 #}
 
 // Import variables from config file
+// pfSense
+$local_pfsense_ip = $config['pfSense']['local_ip'];
+$local_server_ip = $config['network_details']['local_server_ip'];
+$pfSense_username = $config['pfSesnse']['username'];
+$pfSense_password = $config['pfSense']['password'];
 // Network Details
-$local_pfsense_ip = $config['local_pfsense_ip'];
-$local_server_ip = $config['local_server_ip'];
-$wan_domain = $config['wan_domain'];
+$wan_domain = $config['network_details']['wan_domain'];
 $wan1_ip = $config['wan1_ip'];
 $wan2_ip = $config['wan2_ip'];
 $ping_ip = $config['ping_ip'];
-$plex_server_ip = $config['plex_server_ip'];
-$plex_port = $config['plex_port'];
-// Credentials
-$pfSense_username = $config['pfSense_username'];
-$pfSense_password = $config['pfSense_password'];
-$plex_username = $config['plex_username'];
-$plex_password = $config['plex_password'];
-$trakt_username = $config['trakt_username'];
-// API Keys
-$forecast_api = $config['forecast_api'];
-$sabnzbd_api = $config['sabnzbd_api'];
+// plex
+$plex_server_ip = $config['plex']['local_ip'];
+$plex_port = $config['plex']['local_port'];
+$plex_username = $config['plex']['username'];
+$plex_password = $config['plex']['password'];
+
 // SABnzbd+
-$sab_ip = $config['sab_ip'];
-$sab_port = $config['sab_port'];
-$ping_throttle = $config['ping_throttle'];
-$sabSpeedLimitMax = $config['sabSpeedLimitMax'];
-$sabSpeedLimitMin = $config['sabSpeedLimitMin'];
+$sab_ip = $config['sabnzbd']['local_ip'];
+$sab_port = $config['sabnzbd']['local_port'];
+$sabnzbd_api = $config['sabnzbd']['api'];
+$ping_throttle = $config['sabnzbd']['ping_throttle'];
+$sabSpeedLimitMax = $config['sabnzbd']['sabSpeedLimitMax'];
+$sabSpeedLimitMin = $config['sabnzbd']['sabSpeedLimitMin'];
 // Misc
-$cpu_cores = $config['cpu_cores'];
-$weather_always_display = $config['weather_always_display'];
-$weather_lat = $config['weather_lat'];
-$weather_long = $config['weather_long'];
-$weather_name = $config['weather_name'];
+$cpu_cores = $config['misc']['cpu_cores'];
+$trakt_username = $config['misc']['trakt_username'];
+// Weather
+$weather_always_display = $config['weather']['weather_always_display'];
+$weather_lat = $config['weather']['weather_lat'];
+$weather_long = $config['weather']['weather_long'];
+$weather_name = $config['weather']['weather_name'];
+$forecast_api = $config['weather']['forecast_api'];
+// couchpotato
+$couchpotato_ip = $config['couchpotato']['local_ip'];
+$couchpotato_port = $config['couchpotato']['local_port'];
+
+// storage
+$volume_names[] = $config['storage']['volume_name'];
+$volume_paths[] = $config['storage']['volume_path'];
 
 // Set the path for the Plex Token
 $plexTokenCache = ROOT_DIR . '/assets/caches/plex_token.txt';

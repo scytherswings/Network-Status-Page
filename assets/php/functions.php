@@ -1,6 +1,6 @@
 <?php
 
-$config_path = "assets/php/"; //path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
+$config_path = "../../config.ini"; //path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
 
 Ini_Set( 'display_errors', false);
 include '../../init.php';
@@ -15,10 +15,10 @@ $config = parse_ini_file($config_path, true);
 
 // Import variables from config file
 // pfSense
-$pfSense_ip = $config['pfSense']['local_ip'];
-$pfSense_username = $config['pfSesnse']['username'];
-$pfSense_password = $config['pfSense']['password'];
-$pfSense_URL = $config['pfSense']['URL'];
+$pfSense_ip = $config['services']['pfSense']['local_ip'];
+$pfSense_username = $config['services']['pfSesnse']['username'];
+$pfSense_password = $config['services']['pfSense']['password'];
+$pfSense_URL = $config['services']['pfSense']['URL'];
 
 // Network Details
 $local_server_ip = $config['network_details']['local_server_ip'];
@@ -28,20 +28,20 @@ $wan2_ip = $config['wan2_ip'];
 $ping_ip = $config['ping_ip'];
 
 // plex
-$plex_ip = $config['plex']['local_ip'];
-$plex_port = $config['plex']['local_port'];
-$plex_username = $config['plex']['username'];
-$plex_password = $config['plex']['password'];
-$plex_URL = $config['plex']['URL'];
+$plex_ip = $config['services']['plex']['local_ip'];
+$plex_port = $config['services']['plex']['local_port'];
+$plex_username = $config['services']['plex']['username'];
+$plex_password = $config['services']['plex']['password'];
+$plex_URL = $config['services']['plex']['URL'];
 
 // SABnzbd+
-$sabnzbd_ip = $config['sabnzbd']['local_ip'];
-$sabnzbd_port = $config['sabnzbd']['local_port'];
-$sabnzbd_URL = $config['sabnzbd']['URL'];
-$sabnzbd_api = $config['sabnzbd']['api'];
-$ping_throttle = $config['sabnzbd']['ping_throttle'];
-$sabnabdSpeedLimitMax = $config['sabnzbd']['sabSpeedLimitMax'];
-$sabnzbdSpeedLimitMin = $config['sabnzbd']['sabSpeedLimitMin'];
+$sabnzbd_ip = $config['services']['sabnzbd']['local_ip'];
+$sabnzbd_port = $config['services']['sabnzbd']['local_port'];
+$sabnzbd_URL = $config['services']['sabnzbd']['URL'];
+$sabnzbd_api = $config['services']['sabnzbd']['api'];
+$ping_throttle = $config['services']['sabnzbd']['ping_throttle'];
+$sabnabdSpeedLimitMax = $config['services']['sabnzbd']['sabSpeedLimitMax'];
+$sabnzbdSpeedLimitMin = $config['services']['sabnzbd']['sabSpeedLimitMin'];
 // Misc
 $cpu_cores = $config['misc']['cpu_cores'];
 $trakt_username = $config['misc']['trakt_username'];
@@ -52,17 +52,17 @@ $weather_long = $config['weather']['weather_long'];
 $weather_name = $config['weather']['weather_name'];
 $forecast_api = $config['weather']['forecast_api'];
 // couchpotato
-$couchpotato_ip = $config['couchpotato']['local_ip'];
-$couchpotato_port = $config['couchpotato']['local_port'];
-$couchpotato_username = $config['couchpotato']['username'];
-$couchpotato_password = $config['couchpotato']['password'];
-$couchpotato_URL = $config['couchpotato']['URL'];
+$couchpotato_ip = $config['services']['couchpotato']['local_ip'];
+$couchpotato_port = $config['services']['couchpotato']['local_port'];
+$couchpotato_username = $config['services']['couchpotato']['username'];
+$couchpotato_password = $config['services']['couchpotato']['password'];
+$couchpotato_URL = $config['services']['couchpotato']['URL'];
 // sickbeard
-$sickbeard_ip = $config['sickbeard']['local_ip'];
-$sickbeard_port = $config['sickbeard']['local_port'];
-$sickbeard_username = $config['sickberad']['username'];
-$sickbeard_password = $config['sickbeard']['password'];
-$sickbeard_URL = $config['sickbeard']['URL'];
+$sickbeard_ip = $config['services']['sickbeard']['local_ip'];
+$sickbeard_port = $config['services']['sickbeard']['local_port'];
+$sickbeard_username = $config['services']['sickberad']['username'];
+$sickbeard_password = $config['services']['sickbeard']['password'];
+$sickbeard_URL = $config['services']['sickbeard']['URL'];
 
 // storage
 $volume_names[] = $config['storage']['volume_name'];

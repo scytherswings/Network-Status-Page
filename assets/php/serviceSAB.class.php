@@ -33,11 +33,11 @@ class serviceSAB
 	
 	function makeButton()
 	{
-		global $sab_ip;
-		global $sab_port;
+		global $sabnzbd_ip;
+		global $sabnzbd_port;
 		global $sabnzbd_api;
 
-		$sabnzbdXML = simplexml_load_file('http://'.$sab_ip.':'.$sab_port.'/api?mode=qstatus&output=xml&apikey='.$sabnzbd_api);
+		$sabnzbdXML = simplexml_load_file('http://'.$sabnzbd_ip.':'.$sabnzbd_port.'/api?mode=qstatus&output=xml&apikey='.$sabnzbd_api);
 
 		if (($sabnzbdXML->state) == 'Downloading'):
 			$speed = $sabnzbdXML->speed;

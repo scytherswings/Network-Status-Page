@@ -35,11 +35,11 @@ function getPing($sourceIP,$destinationIP)
 	// This will work with any pfSense install. $sourceIP is the IP address of the WAN that you want to
 	// use to ping with. This allows you to ping the same address from multiple WANs if you need to.
 
-	global $local_pfsense_ip;
+	global $pfSense_ip;
 	global $pfSense_username;
 	global $pfSense_password;
 
-	$ssh = new Net_SSH2($local_pfsense_ip);
+	$ssh = new Net_SSH2($pfSense_ip);
 	if (!$ssh->login($pfSense_username,$pfSense_password)) {
 		//exit('Login Failed');
 		return array(0,0);
@@ -61,11 +61,11 @@ function getPing($sourceIP,$destinationIP)
 
 function sabSpeedAdjuster()
 {
-	global $sab_ip;
-	global $sab_port;
+	global $sabnzbd_ip;
+	global $sabnzbd_port;
 	global $sabnzbd_api;
-	global $sabSpeedLimitMax;
-	global $sabSpeedLimitMin;
+	global $sabnabdSpeedLimitMax;
+	global $sabnzbdSpeedLimitMin;
 	// Set how high ping we want to hit before throttling
 	global $ping_throttle;
 	global $wan1_ip;
@@ -75,7 +75,7 @@ function sabSpeedAdjuster()
 	// Check the current ping
 	$avgPing = getping($wan2_ip,$ping_ip);
 	// Get SABnzbd XML
-	$sabnzbdXML = simplexml_load_file('http://'.$sab_ip.':'.$sab_port.'/api?mode=queue&start=START&limit=LIMIT&output=xml&apikey='.$sabnzbd_api);
+	$sabnzbdXML = simplexml_load_file('http://'.$sabnzbd_ip.':'.$sabnzbd_port.'/api?mode=queue&start=START&limit=LIMIT&output=xml&apikey='.$sabnzbd_api);
 	// Get current SAB speed limit
 	$sabSpeedLimitCurrent = $sabnzbdXML->speedlimit;
 	
@@ -83,22 +83,22 @@ function sabSpeedAdjuster()
 	if (($sabnzbdXML->status) == 'Downloading'):
 			// If it is downloading and ping is over X value, slow it down
 			if ($avgPing > $ping_throttle):
-				if ($sabSpeedLimitCurrent > $sabSpeedLimitMin):
+				if ($sabSpeedLimitCurrent > $sabnzbdSpeedLimitMin):
 					// Reduce speed by 256KBps
 					echo 'Ping is over '.$ping_throttle;
 					echo '<br>';
 					echo 'Slowing down SAB';
 					$sabSpeedLimitSet = $sabSpeedLimitCurrent - 256;
-					shell_exec('curl "http://'.$sab_ip.':'.$sab_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
+					shell_exec('curl "http://'.$sabnzbd_ip.':'.$sabnzbd_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
 				else:
 					echo 'Ping is over '.$ping_throttle.' but SAB cannot slow down anymore';
 				endif;	
 			elseif (($avgPing + 9) < $ping_throttle):
-				if ($sabSpeedLimitCurrent < $sabSpeedLimitMax):
+				if ($sabSpeedLimitCurrent < $sabnabdSpeedLimitMax):
 					// Increase speed by 256KBps
 					echo 'SAB is downloading and ping is '.($avgPing + 9).'  so increasing download speed.';
 					$sabSpeedLimitSet = $sabSpeedLimitCurrent + 256;
-					shell_exec('curl "http://'.$sab_ip.':'.$sab_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
+					shell_exec('curl "http://'.$sabnzbd_ip.':'.$sabnzbd_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
 				else:
 					echo 'SAB is downloading. Ping is low enough but we are at global download speed limit.';
 				endif;

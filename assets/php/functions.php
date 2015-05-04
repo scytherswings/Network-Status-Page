@@ -6,6 +6,10 @@ Ini_Set( 'display_errors', false);
 include '../../init.php';
 include 'lib/phpseclib0.3.5/Net/SSH2.php';
 require_once 'MinecraftServerStatus.class.php';
+
+
+
+
 $config = parse_ini_file($config_path, true);
 #$config = parse_ini_file($config_path);
 #foreach ($config as $section) {
@@ -14,32 +18,33 @@ $config = parse_ini_file($config_path, true);
 
 // Import variables from config file
 // pfSense
-$local_pfsense_ip = $config['pfSense']['local_ip'];
-$local_server_ip = $config['network_details']['local_server_ip'];
+$pfSense_ip = $config['pfSense']['local_ip'];
 $pfSense_username = $config['pfSesnse']['username'];
 $pfSense_password = $config['pfSense']['password'];
 $pfSense_URL = $config['pfSense']['URL'];
+
 // Network Details
+$local_server_ip = $config['network_details']['local_server_ip'];
 $wan_domain = $config['network_details']['wan_domain'];
 $wan1_ip = $config['wan1_ip'];
 $wan2_ip = $config['wan2_ip'];
 $ping_ip = $config['ping_ip'];
 
 // plex
-$plex_server_ip = $config['plex']['local_ip'];
+$plex_ip = $config['plex']['local_ip'];
 $plex_port = $config['plex']['local_port'];
 $plex_username = $config['plex']['username'];
 $plex_password = $config['plex']['password'];
 $plex_URL = $config['plex']['URL'];
 
 // SABnzbd+
-$sab_ip = $config['sabnzbd']['local_ip'];
-$sab_port = $config['sabnzbd']['local_port'];
-$sab_URL = $config['sabnzbd']['URL'];
+$sabnzbd_ip = $config['sabnzbd']['local_ip'];
+$sabnzbd_port = $config['sabnzbd']['local_port'];
+$sabnzbd_URL = $config['sabnzbd']['URL'];
 $sabnzbd_api = $config['sabnzbd']['api'];
 $ping_throttle = $config['sabnzbd']['ping_throttle'];
-$sabSpeedLimitMax = $config['sabnzbd']['sabSpeedLimitMax'];
-$sabSpeedLimitMin = $config['sabnzbd']['sabSpeedLimitMin'];
+$sabnabdSpeedLimitMax = $config['sabnzbd']['sabSpeedLimitMax'];
+$sabnzbdSpeedLimitMin = $config['sabnzbd']['sabSpeedLimitMin'];
 // Misc
 $cpu_cores = $config['misc']['cpu_cores'];
 $trakt_username = $config['misc']['trakt_username'];
@@ -52,10 +57,55 @@ $forecast_api = $config['weather']['forecast_api'];
 // couchpotato
 $couchpotato_ip = $config['couchpotato']['local_ip'];
 $couchpotato_port = $config['couchpotato']['local_port'];
+$couchpotato_username = $config['couchpotato']['username'];
+$couchpotato_password = $config['couchpotato']['password'];
+$couchpotato_URL = $config['couchpotato']['URL'];
+// sickbeard
+$sickbeard_ip = $config['sickbeard']['local_ip'];
+$sickbeard_port = $config['sickbeard']['local_port'];
+$sickbeard_username = $config['sickberad']['username'];
+$sickbeard_password = $config['sickbeard']['password'];
+$sickbeard_URL = $config['sickbeard']['URL'];
 
 // storage
 $volume_names[] = $config['storage']['volume_name'];
 $volume_paths[] = $config['storage']['volume_path'];
+
+
+
+
+
+
+
+
+// Global variable declarations
+global $pfSense_ip;
+global $pfSense_URL;
+global $pfSense_username;
+global $pfSense_password;
+global $local_server_ip;
+global $wan_domain;
+global $plex_ip;
+global $plex_port;
+global $plex_username;
+global $plex_password;
+global $plex_URL;
+global $sabnzbd_ip;
+global $sabnzbd_port;
+global $sabnzbd_URL;
+global $sabnzbd_api;
+global $sabnzbdSpeedLimitMin;
+global $sabnabdSpeedLimitMax;
+global $couchpotato_ip;
+global $couchpotato_port;
+global $couchpotato_username;
+global $couchpotato_password;
+global $couchpotato_URL;
+global $sickbeard_ip;
+global $sickbeard_port;
+global $sickbeard_username;
+global $sickbeard_password;
+global $sickbeard_URL;
 
 // Set the path for the Plex Token
 $plexTokenCache = ROOT_DIR . '/assets/caches/plex_token.txt';
@@ -329,12 +379,12 @@ function printTotalDiskBar($dup, $name = "", $dsu, $dts)
 
 function ping()
 {
-	global $local_pfsense_ip;
+	global $pfSense_ip;
 	global $ping_ip;
 
 	$clientIP = get_client_ip();
 	//$pingIP = '8.8.8.8';
-	if($clientIP != $local_pfsense_ip) {
+	if($clientIP != $pfSense_ip) {
 		$ping_ip = $clientIP;
 	}
 	$terminal_output = shell_exec('ping -c 5 -q '.$ping_ip);
@@ -356,12 +406,12 @@ function getNetwork()
 {
 	// It should be noted that this function is designed specifically for getting the local / wan name for Plex.
 	global $wan_domain;
-	global $plex_server_ip;
+	global $plex_ip;
     global $isRFCSpace;
 
     $isRFCSpace = preg_match("(^127\.0\.0\.1)| (^10\.)| (^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)| (^192\.168\.)", get_client_ip());
 	if($isRFCSpace):
-		$network='http://'.$plex_server_ip;
+		$network='http://'.$plex_ip;
 	else:
 		$network='http://'.$wan_domain;
 	endif;
@@ -382,18 +432,18 @@ function get_client_ip()
 
 function sabSpeedAdjuster()
 {
-	global $sab_ip;
-	global $sab_port;
+	global $sabnzbd_ip;
+	global $sabnzbd_port;
 	global $sabnzbd_api;
-	global $sabSpeedLimitMax;
-	global $sabSpeedLimitMin;
+	global $sabnabdSpeedLimitMax;
+	global $sabnzbdSpeedLimitMin;
 	// Set how high ping we want to hit before throttling
 	global $ping_throttle;
 
 	// Check the current ping
 	$avgPing = ping();
 	// Get SABnzbd XML
-	$sabnzbdXML = simplexml_load_file('http://'.$sab_ip.':'.$sab_port.'/api?mode=queue&start=START&limit=LIMIT&output=xml&apikey='.$sabnzbd_api);
+	$sabnzbdXML = simplexml_load_file('http://'.$sabnzbd_ip.':'.$sabnzbd_port.'/api?mode=queue&start=START&limit=LIMIT&output=xml&apikey='.$sabnzbd_api);
 	// Get current SAB speed limit
 	$sabSpeedLimitCurrent = $sabnzbdXML->speedlimit;
 	
@@ -401,22 +451,22 @@ function sabSpeedAdjuster()
 	if (($sabnzbdXML->status) == 'Downloading'):
 			// If it is downloading and ping is over X value, slow it down
 			if ($avgPing > $ping_throttle):
-				if ($sabSpeedLimitCurrent > $sabSpeedLimitMin):
+				if ($sabSpeedLimitCurrent > $sabnzbdSpeedLimitMin):
 					// Reduce speed by 256KBps
 					echo 'Ping is over '.$ping_throttle;
 					echo '<br>';
 					echo 'Slowing down SAB';
 					$sabSpeedLimitSet = $sabSpeedLimitCurrent - 256;
-					shell_exec('curl "http://'.$sab_ip.':'.$sab_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
+					shell_exec('curl "http://'.$sabnzbd_ip.':'.$sabnzbd_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
 				else:
 					echo 'Ping is over '.$ping_throttle.' but SAB cannot slow down anymore';
 				endif;	
 			elseif (($avgPing . 9) < $ping_throttle):
-				if ($sabSpeedLimitCurrent < $sabSpeedLimitMax):
+				if ($sabSpeedLimitCurrent < $sabnabdSpeedLimitMax):
 					// Increase speed by 256KBps
 					echo 'SAB is downloading and ping is '.($avgPing . 9).'  so increasing download speed.';
 					$sabSpeedLimitSet = $sabSpeedLimitCurrent + 256;
-					shell_exec('curl "http://'.$sab_ip.':'.$sab_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
+					shell_exec('curl "http://'.$sabnzbd_ip.':'.$sabnzbd_port.'/api?mode=config&name=speedlimit&value='.$sabSpeedLimitSet.'&apikey='.$sabnzbd_api.'"');
 				else:
 					echo 'SAB is downloading. Ping is low enough but we are at global download speed limit.';
 				endif;
@@ -431,7 +481,7 @@ function sabSpeedAdjuster()
 
 function makeRecenlyViewed()
 {
-	global $local_pfsense_ip;
+	global $pfSense_ip;
 	global $plex_port;
 	global $trakt_username;
 	global $weather_lat;
@@ -465,7 +515,7 @@ function makeRecenlyViewed()
 		}
 	}
 	// This checks to see if you are inside your local network. If you are it gives you the forecast as well.
-	if($clientIP == $local_pfsense_ip && count($plexSessionXML->Video) == 0) {
+	if($clientIP == $pfSense_ip && count($plexSessionXML->Video) == 0) {
 		echo '<hr>';
 		echo '<h1 class="exoextralight" style="margin-top:5px;">';
 		echo 'Forecast</h1>';
@@ -689,10 +739,10 @@ function getBandwidth($interface)
 	// you need to change the -i rl0 to the name of your interface for WAN e.g. -i <interface>
 	// You will also probably need to do a var_dump of $output below and figure out exactly which array 
 	// values you need as they might be off by one or two each.
-	global $local_pfsense_ip;
+	global $pfSense_ip;
 	global $pfSense_username;
 	global $pfSense_password;
-	$ssh = new Net_SSH2($local_pfsense_ip);
+	$ssh = new Net_SSH2($pfSense_ip);
 	if (!$ssh->login($pfSense_username,$pfSense_password)) {
 		//exit('Login Failed');
 		return array(0,0);
@@ -726,11 +776,11 @@ function getPing($sourceIP,$destinationIP)
 	// This will work with any pfSense install. $sourceIP is the IP address of the WAN that you want to
 	// use to ping with. This allows you to ping the same address from multiple WANs if you need to.
 
-	global $local_pfsense_ip;
+	global $pfSense_ip;
 	global $pfSense_username;
 	global $pfSense_password;
 
-	$ssh = new Net_SSH2($local_pfsense_ip);
+	$ssh = new Net_SSH2($pfSense_ip);
 	if (!$ssh->login($pfSense_username,$pfSense_password)) {
 		//exit('Login Failed');
 		return array(0,0);

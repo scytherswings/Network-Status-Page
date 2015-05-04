@@ -1,14 +1,11 @@
 <?php
 
-$config_path = '/opt/Network-Status-Page/'; //path to config file, recommend you place it outside of web root
+$config_path = "assets/php/"; //path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
 
 Ini_Set( 'display_errors', false);
 include '../../init.php';
 include 'lib/phpseclib0.3.5/Net/SSH2.php';
 require_once 'MinecraftServerStatus.class.php';
-
-
-
 
 $config = parse_ini_file($config_path, true);
 #$config = parse_ini_file($config_path);

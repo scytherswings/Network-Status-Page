@@ -16,16 +16,16 @@ $config = parse_ini_file($config_path, true);
 // Import variables from config file
 // pfSense
 $pfSense_ip = $config['services']['pfSense']['local_ip'];
-$pfSense_username = $config['services']['pfSesnse']['username'];
+$pfSense_username = $config['services']['pfSense']['username'];
 $pfSense_password = $config['services']['pfSense']['password'];
 $pfSense_URL = $config['services']['pfSense']['URL'];
 
 // Network Details
 $local_server_ip = $config['network_details']['local_server_ip'];
 $wan_domain = $config['network_details']['wan_domain'];
-$wan1_ip = $config['wan1_ip'];
-$wan2_ip = $config['wan2_ip'];
-$ping_ip = $config['ping_ip'];
+$wan1_ip = $config['network_details']['wan1_ip'];
+$wan2_ip = $config['network_details']['wan2_ip'];
+$ping_ip = $config['network_details']['ping_ip'];
 
 // plex
 $plex_ip = $config['services']['plex']['local_ip'];
@@ -60,7 +60,7 @@ $couchpotato_URL = $config['services']['couchpotato']['URL'];
 // sickbeard
 $sickbeard_ip = $config['services']['sickbeard']['local_ip'];
 $sickbeard_port = $config['services']['sickbeard']['local_port'];
-$sickbeard_username = $config['services']['sickberad']['username'];
+$sickbeard_username = $config['services']['sickbeard']['username'];
 $sickbeard_password = $config['services']['sickbeard']['password'];
 $sickbeard_URL = $config['services']['sickbeard']['URL'];
 

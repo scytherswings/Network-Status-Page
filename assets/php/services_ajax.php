@@ -25,9 +25,9 @@ else:
 endif;
 
 $services = array(
-	new service("Plex", 32400, "http://d4rk.co:32400/web/index.html#!/dashboard"),
-	//new service("pfSense", 8082, "http://d4rk.co:8082", "d4rk.co"),
-	new serviceSAB($sabTitle, 8080, "http://d4rk.co:8080", "10.0.1.5"),
+	new service("Plex", 32400, $plex_URL),
+	new service("pfSense", 8082, $pfSense_URL, $pfSense_URL),
+	new serviceSAB($sabTitle, 8080, $sabnzbd_URL, $sab_ip),
 	new service("SickBeard", 8081, "http://d4rk.co:8081", "10.0.1.3"),
 	new service("CouchPotato", 5050, "http://d4rk.co:5050", "10.0.1.3"),
 	new service("Transmission", 9091, "http://d4rk.co:9091", "10.0.1.5"),

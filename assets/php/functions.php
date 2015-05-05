@@ -488,7 +488,7 @@ function makeRecenlyViewed()
 	$clientIP = get_client_ip();
 	$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
 	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
-	$traktThumb = '/Users/zeus/Sites/d4rk.co/assets/caches/thumbnails/all-tvthumb.jpg';
+	$traktThumb = 'assets/caches/thumbnails/all-tvthumb.jpg';
 
 	echo '<div class="col-md-12">';
 	echo '<a href="http://trakt.tv/user/'.$trakt_username.'" class="thumbnail">';

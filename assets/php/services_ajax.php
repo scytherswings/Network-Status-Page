@@ -26,9 +26,9 @@ endif;
 
 $services = array(
 	new service("Plex", $plex_port, $plex_URL, $plex_ip),
-	new service("pfSense", $pfsense_port, $pfSense_URL, $pfSense_ip),
+	new service("pfSense", $pfSense_port, $pfSense_URL, $pfSense_ip),
 	new serviceSAB($sabTitle, $sabnzbd_port, $sabnzbd_URL, $sabnzbd_ip),
-	new service("SickBeard", $sickbeard_port, $sickberad_URL, $sickbeard_ip),
+	new service("SickBeard", $sickbeard_port, $sickbeard_URL, $sickbeard_ip),
 	new service("CouchPotato", $couchpotato_port, $couchpotato_URL, $couchpotato_ip),
 	new service("Transmission", 9091, "http://d4rk.co:9091", "10.0.1.5"),
 	new service("iTunes Server", 3689, "http://www.apple.com/itunes/"),

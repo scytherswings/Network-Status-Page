@@ -43,18 +43,19 @@ $minecraft_config_lines = 4;
 global $pfSense_instance;
 
 $pfSense_config_line_count = count($config['services']['pfSense']);
-if ($pfSense_config_line_count > $pfSense_config_lines) {
-	
-	for ($pfSense_config_line_count; $i < $pfSense_config_lines; $i++) {
-			$num = $i/$pfSense_config_lines;
-			$pfSense_instance[$num] += $config['services']['pfSense']['server_name'];
-			$pfSense_instance[$num] += $config['services']['pfSense']['local_port'];
-			$pfSense_instance[$num] += $config['services']['pfSense']['URL'];
-			$pfSense_instance[$num] += $config['services']['pfSense']['local_ip'];
-			$pfSense_instance[$num] += $config['services']['pfSense']['username'];
-			$pfSense_instance[$num] += $config['services']['pfSense']['password'];
-	}
+//echo $pfSense_config_line_count;
+
+for ($pfSense_config_line_count, $i=0; $i < $pfSense_config_lines; $i++) {
+		(int)$num = $i/$pfSense_config_lines;
+		echo $num;
+		$pfSense_instance[$num] += $config['services']['pfSense']['server_name'];
+		$pfSense_instance[$num] += $config['services']['pfSense']['local_port'];
+		$pfSense_instance[$num] += $config['services']['pfSense']['URL'];
+		$pfSense_instance[$num] += $config['services']['pfSense']['local_ip'];
+		$pfSense_instance[$num] += $config['services']['pfSense']['username'];
+		$pfSense_instance[$num] += $config['services']['pfSense']['password'];
 }
+
 // pfSense
 /*
 $pfSense_server_name = $config['services']['pfSense']['server_name'];

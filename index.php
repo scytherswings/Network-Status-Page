@@ -132,11 +132,11 @@
 									<div id="left_column_top"></div>
 								</div>
 							</div>
-							<!-- Bandwidth -->
+							<!-- Throughput -->
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title exoextralight">
-										Bandwidth
+										Throughput
 									</h4>
 								</div>
 								<div class="panel-body" >

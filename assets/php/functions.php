@@ -14,12 +14,6 @@ $config = parse_ini_file($config_path, true);
 #}
 
 // Import variables from config file
-// pfSense
-$pfSense_ip = $config['services']['pfSense']['local_ip'];
-$pfSense_username = $config['services']['pfSense']['username'];
-$pfSense_password = $config['services']['pfSense']['password'];
-$pfSense_URL = $config['services']['pfSense']['URL'];
-
 // Network Details
 $local_server_ip = $config['network_details']['local_server_ip'];
 $wan_domain = $config['network_details']['wan_domain'];
@@ -27,6 +21,48 @@ $wan1_ip = $config['network_details']['wan1_ip'];
 $wan2_ip = $config['network_details']['wan2_ip'];
 $ping_ip = $config['network_details']['ping_ip'];
 
+// Misc
+$cpu_cores = $config['misc']['cpu_cores'];
+$trakt_username = $config['misc']['trakt_username'];
+
+// Weather
+$weather_always_display = $config['weather']['weather_always_display'];
+$weather_lat = $config['weather']['weather_lat'];
+$weather_long = $config['weather']['weather_long'];
+$weather_name = $config['weather']['weather_name'];
+$forecast_api = $config['weather']['forecast_api'];
+
+// Services
+$pfSense_config_lines = 6;
+$plex_config_lines = 6;
+$sabnzbd_config_lines = 8;
+$couchpotato_config_lines = 6;
+$sickbeard_config_lines = 6;
+$minecraft_config_lines = 4;
+
+global $pfSense_instance;
+
+$pfSense_config_line_count = count($config['services']['pfSense']);
+if ($pfSense_config_line_count > $pfSense_config_lines) {
+	
+	for ($pfSense_config_line_count; $i < $pfSense_config_lines; $i++) {
+			$num = $i/$pfSense_config_lines;
+			$pfSense_instance[$num] += $config['services']['pfSense']['server_name'];
+			$pfSense_instance[$num] += $config['services']['pfSense']['local_port'];
+			$pfSense_instance[$num] += $config['services']['pfSense']['URL'];
+			$pfSense_instance[$num] += $config['services']['pfSense']['local_ip'];
+			$pfSense_instance[$num] += $config['services']['pfSense']['username'];
+			$pfSense_instance[$num] += $config['services']['pfSense']['password'];
+	}
+}
+// pfSense
+/*
+$pfSense_server_name = $config['services']['pfSense']['server_name'];
+$pfSense_ip = $config['services']['pfSense']['local_ip'];
+$pfSense_username = $config['services']['pfSense']['username'];
+$pfSense_password = $config['services']['pfSense']['password'];
+$pfSense_URL = $config['services']['pfSense']['URL'];
+*/
 // plex
 $plex_ip = $config['services']['plex']['local_ip'];
 $plex_port = $config['services']['plex']['local_port'];
@@ -42,21 +78,14 @@ $sabnzbd_api = $config['services']['sabnzbd']['api'];
 $ping_throttle = $config['services']['sabnzbd']['ping_throttle'];
 $sabnabdSpeedLimitMax = $config['services']['sabnzbd']['sabSpeedLimitMax'];
 $sabnzbdSpeedLimitMin = $config['services']['sabnzbd']['sabSpeedLimitMin'];
-// Misc
-$cpu_cores = $config['misc']['cpu_cores'];
-$trakt_username = $config['misc']['trakt_username'];
-// Weather
-$weather_always_display = $config['weather']['weather_always_display'];
-$weather_lat = $config['weather']['weather_lat'];
-$weather_long = $config['weather']['weather_long'];
-$weather_name = $config['weather']['weather_name'];
-$forecast_api = $config['weather']['forecast_api'];
+
 // couchpotato
 $couchpotato_ip = $config['services']['couchpotato']['local_ip'];
 $couchpotato_port = $config['services']['couchpotato']['local_port'];
 $couchpotato_username = $config['services']['couchpotato']['username'];
 $couchpotato_password = $config['services']['couchpotato']['password'];
 $couchpotato_URL = $config['services']['couchpotato']['URL'];
+
 // sickbeard
 $sickbeard_ip = $config['services']['sickbeard']['local_ip'];
 $sickbeard_port = $config['services']['sickbeard']['local_port'];

@@ -404,9 +404,9 @@ function getNetwork()
 	// It should be noted that this function is designed specifically for getting the local / wan name for Plex.
 	global $wan_domain;
 	global $plex_ip;
-    global $isRFCSpace;
+    #global $isRFCSpace;
 
-    $isRFCSpace = preg_match("(^127\.0\.0\.1)| (^10\.)| (^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)| (^192\.168\.)", get_client_ip());
+    $isRFCSpace = preg_match("/(^10\.)|(^127\.0\.0\.1)|(^192\.168\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)/", get_client_ip());
 	if($isRFCSpace):
 		$network='http://'.$plex_ip;
 	else:

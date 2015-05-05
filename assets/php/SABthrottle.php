@@ -4,13 +4,19 @@
 	// While it is standalone php file it still points to the same configuration file that comes with Network Status Page so you can
 	// easily adjust preferences there. I simply made this not have any includes so that
 	// you could move it to wherever is most convenient for scripts.
-	$config_path = "/Users/zeus/Sites/config.ini"; //path to config file, recommend you place it outside of web root
-	include '/Users/zeus/Sites/d4rk.co/assets/php/lib/phpseclib0.3.5/Net/SSH2.php';
-
+	
 	Ini_Set( 'display_errors', true );
-	$config = parse_ini_file($config_path);
+	include '../../init.php';
+	include ROOT_DIR . '/assets/php/functions.php';
+	include 'lib/phpseclib0.3.5/Net/SSH2.php';
+	#$config_path = "/Users/zeus/Sites/config.ini"; //path to config file, recommend you place it outside of web root
+	#include '/Users/zeus/Sites/d4rk.co/assets/php/lib/phpseclib0.3.5/Net/SSH2.php';
+	
+	#Ini_Set( 'display_errors', true );
+	#$config = parse_ini_file($config_path);
 
 	// Network Details
+	/*
 	$local_pfsense_ip = $config['local_pfsense_ip'];
 	$local_server_ip = $config['local_server_ip'];
 	$wan_domain = $config['wan_domain'];
@@ -29,16 +35,16 @@
 	$ping_throttle = $config['ping_throttle'];
 	$sabSpeedLimitMax = $config['sabSpeedLimitMax'];
 	$sabSpeedLimitMin = $config['sabSpeedLimitMin'];
-
+	*/
 function getPing($sourceIP,$destinationIP)
 {
 	// This will work with any pfSense install. $sourceIP is the IP address of the WAN that you want to
 	// use to ping with. This allows you to ping the same address from multiple WANs if you need to.
-
+/*
 	global $pfSense_ip;
 	global $pfSense_username;
 	global $pfSense_password;
-
+*/
 	$ssh = new Net_SSH2($pfSense_ip);
 	if (!$ssh->login($pfSense_username,$pfSense_password)) {
 		//exit('Login Failed');
@@ -61,6 +67,7 @@ function getPing($sourceIP,$destinationIP)
 
 function sabSpeedAdjuster()
 {
+	/*
 	global $sabnzbd_ip;
 	global $sabnzbd_port;
 	global $sabnzbd_api;
@@ -71,7 +78,7 @@ function sabSpeedAdjuster()
 	global $wan1_ip;
 	global $wan2_ip;
 	global $ping_ip;
-
+*/
 	// Check the current ping
 	$avgPing = getping($wan2_ip,$ping_ip);
 	// Get SABnzbd XML

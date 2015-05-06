@@ -23,7 +23,7 @@ if (($sabnzbdXML->state) == 'Downloading'):
 else:
 	$sabTitle = 'SABnzbd';
 endif;
-
+/*
 $services = array(
 	new service($plex_server_name, $plex_port, $plex_URL, $plex_ip),
 	//new service($pfSense_server_name, $pfSense_port, $pfSense_URL, $pfSense_ip),
@@ -36,11 +36,20 @@ $services = array(
 	//new serviceMinecraft("Vanilla", 25564, "http://minecraft.d4rk.co", "mc.d4rk.co"),
 	//new serviceMinecraft("Bevo Tech Pack", 25565, "http://minecraft.d4rk.co")
 );
-//echo $pfSense_instance;
-foreach ($pfSense_instance as $instance) {
-	echo $instance;
-	$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance[2]),array_values($instance)[3]);
-	$services[] = $temp_object;
+*/
+global $services;
+
+function add_service($instances) {
+	global $services;
+	
+	foreach ($instances as $instance) {
+		$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance[2]),array_values($instance)[3]);
+		$services[] = $temp_object;
+	}
+}
+	
+foreach ($service_instances as $service_instance) {
+	add_service($service_instance);
 }
 
 /*

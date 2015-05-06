@@ -39,25 +39,116 @@ $sabnzbd_config_lines = 8;
 $couchpotato_config_lines = 6;
 $sickbeard_config_lines = 6;
 $minecraft_config_lines = 4;
+$deluge_config_lines = 6;
 
-global $pfSense_instance;
-$pfSense_instance = array();
+global $pfSense_instances;
+$pfSense_instances = array();
+$pfSense_config_line_count = (count($config['pfSense'], COUNT_RECURSIVE) - $pfSense_config_lines);
 
-$pfSense_config_line_count = count($config['pfSense']);
-//echo $pfSense_config_line_count;
-
-for ($i=1; $i <= $pfSense_config_lines; $i++) {
-		$num = (ceil($i/$pfSense_config_lines));
-		//echo " pfsense_lines".$pfSense_config_lines;
-		//echo " i value".$i;
-		//echo " number".$num;
-		$pfSense_instance[$num][1] = $config['pfSense']['server_name'][$num];
-		$pfSense_instance[$num][2] = $config['pfSense']['local_port'][$num];
-		$pfSense_instance[$num][3] = $config['pfSense']['URL'][$num];
-		$pfSense_instance[$num][4] = $config['pfSense']['local_ip'][$num];
-		$pfSense_instance[$num][5] = $config['pfSense']['username'][$num];
-		$pfSense_instance[$num][6] = $config['pfSense']['password'][$num];
+for ($i=1; $i <= $pfSense_config_line_count; $i++) {
+	$num = ceil($i/$pfSense_config_lines);
+	$pfSense_instances[$num][1] = $config['pfSense']['server_name'][$num];
+	$pfSense_instances[$num][2] = $config['pfSense']['local_port'][$num];
+	$pfSense_instances[$num][3] = $config['pfSense']['URL'][$num];
+	$pfSense_instances[$num][4] = $config['pfSense']['local_ip'][$num];
+	$pfSense_instances[$num][5] = $config['pfSense']['username'][$num];
+	$pfSense_instances[$num][6] = $config['pfSense']['password'][$num];
 }
+
+global $plex_instances;
+$plex_instances = array();
+$plex_config_line_count = (count($config['plex'], COUNT_RECURSIVE) - $plex_config_lines);
+
+for ($i=1; $i <= $plex_config_line_count; $i++) {
+	$num = ceil($i/$plex_config_lines);
+	$plex_instances[$num][1] = $config['plex']['server_name'][$num];
+	$plex_instances[$num][2] = $config['plex']['local_port'][$num];
+	$plex_instances[$num][3] = $config['plex']['URL'][$num];
+	$plex_instances[$num][4] = $config['plex']['local_ip'][$num];
+	$plex_instances[$num][5] = $config['plex']['username'][$num];
+	$plex_instances[$num][6] = $config['plex']['password'][$num];
+}
+
+global $couchpotato_instances;
+$couchpotato_instances = array();
+$couchpotato_config_line_count = (count($config['couchpotato'], COUNT_RECURSIVE) - $couchpotato_config_lines);
+
+for ($i=1; $i <= $couchpotato_config_line_count; $i++) {
+	$num = ceil($i/$couchpotato_config_lines);
+	$couchpotato_instances[$num][1] = $config['couchpotato']['server_name'][$num];
+	$couchpotato_instances[$num][2] = $config['couchpotato']['local_port'][$num];
+	$couchpotato_instances[$num][3] = $config['couchpotato']['URL'][$num];
+	$couchpotato_instances[$num][4] = $config['couchpotato']['local_ip'][$num];
+	$couchpotato_instances[$num][5] = $config['couchpotato']['username'][$num];
+	$couchpotato_instances[$num][6] = $config['couchpotato']['password'][$num];
+}
+
+global $sickbeard_instances;
+$sickbeard_instances = array();
+$sickbeard_config_line_count = (count($config['sickbeard'], COUNT_RECURSIVE) - $sickbeard_config_lines);
+
+for ($i=1; $i <= $sickbeard_config_line_count; $i++) {
+	$num = ceil($i/$sickbeard_config_lines);
+	$sickbeard_instances[$num][1] = $config['sickbeard']['server_name'][$num];
+	$sickbeard_instances[$num][2] = $config['sickbeard']['local_port'][$num];
+	$sickbeard_instances[$num][3] = $config['sickbeard']['URL'][$num];
+	$sickbeard_instances[$num][4] = $config['sickbeard']['local_ip'][$num];
+	$sickbeard_instances[$num][5] = $config['sickbeard']['username'][$num];
+	$sickbeard_instances[$num][6] = $config['sickbeard']['password'][$num];
+}
+
+global $minecraft_instances;
+$minecraft_instances = array();
+$minecraft_config_line_count = (count($config['minecraft'], COUNT_RECURSIVE) - $minecraft_config_lines);
+
+for ($i=1; $i <= $minecraft_config_line_count; $i++) {
+	$num = ceil($i/$minecraft_config_lines);
+	$minecraft_instances[$num][1] = $config['minecraft']['server_name'][$num];
+	$minecraft_instances[$num][2] = $config['minecraft']['local_port'][$num];
+	$minecraft_instances[$num][3] = $config['minecraft']['URL'][$num];
+	$minecraft_instances[$num][4] = $config['minecraft']['local_ip'][$num];
+}
+
+global $deluge_instances;
+$deluge_instances = array();
+$deluge_config_line_count = (count($config['deluge'], COUNT_RECURSIVE) - $deluge_config_lines);
+
+for ($i=1; $i <= $deluge_config_line_count; $i++) {
+	$num = ceil($i/$deluge_config_lines);
+	$deluge_instances[$num][1] = $config['deluge']['server_name'][$num];
+	$deluge_instances[$num][2] = $config['deluge']['local_port'][$num];
+	$deluge_instances[$num][3] = $config['deluge']['URL'][$num];
+	$deluge_instances[$num][4] = $config['deluge']['local_ip'][$num];
+	$deluge_instances[$num][5] = $config['deluge']['username'][$num];
+	$deluge_instances[$num][6] = $config['deluge']['password'][$num];
+}
+
+global $sabnzbd_instances;
+$sabnzbd_instances = array();
+$sabnzbd_config_line_count = (count($config['sabnzbd'], COUNT_RECURSIVE) - $sabnzbd_config_lines);
+
+for ($i=1; $i <= $sabnzbd_config_line_count; $i++) {
+	$num = ceil($i/$sabnzbd_config_lines);
+	$sabnzbd_instances[$num][1] = $config['sabnzbd']['server_name'][$num];
+	$sabnzbd_instances[$num][2] = $config['sabnzbd']['local_port'][$num];
+	$sabnzbd_instances[$num][3] = $config['sabnzbd']['URL'][$num];
+	$sabnzbd_instances[$num][4] = $config['sabnzbd']['local_ip'][$num];
+	$sabnzbd_instances[$num][5] = $config['sabnzbd']['api'][$num];
+	$sabnzbd_instances[$num][6] = $config['sabnzbd']['sabSpeedLimitMax'][$num];
+	$sabnzbd_instances[$num][7] = $config['sabnzbd']['sabSpeedLimitMin'][$num];
+	$sabnzbd_instances[$num][8] = $config['sabnzbd']['ping_throttle'][$num];
+}
+
+$service_instances = array(
+	$pfSense_instances,
+	$plex_instances,
+	$couchpotato_instances,
+	$sickbeard_instances,
+	$sabnzbd_instances,
+	$deluge_instances,
+	$minecraft_instances
+	);
+
 // pfSense
 /*
 $pfSense_server_name = $config['services']['pfSense']['server_name'];

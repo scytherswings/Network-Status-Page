@@ -42,20 +42,21 @@ $minecraft_config_lines = 4;
 
 global $pfSense_instance;
 
-$pfSense_config_line_count = count($config['services']['pfSense']);
+$pfSense_config_line_count = count($config['pfSense']);
 //echo $pfSense_config_line_count;
 
-for ($pfSense_config_line_count, $i=0; $i < $pfSense_config_lines; $i++) {
-		(int)$num = $i/$pfSense_config_lines;
-		echo $num;
-		$pfSense_instance[$num] += $config['services']['pfSense']['server_name'];
-		$pfSense_instance[$num] += $config['services']['pfSense']['local_port'];
-		$pfSense_instance[$num] += $config['services']['pfSense']['URL'];
-		$pfSense_instance[$num] += $config['services']['pfSense']['local_ip'];
-		$pfSense_instance[$num] += $config['services']['pfSense']['username'];
-		$pfSense_instance[$num] += $config['services']['pfSense']['password'];
+for ($i=1; $i <= $pfSense_config_lines; $i++) {
+		$num = (ceil($i/$pfSense_config_lines));
+		echo " pfsense_lines".$pfSense_config_lines;
+		echo " i value".$i;
+		echo " number".$num;
+		$pfSense_instance[$num] = $config['pfSense']['server_name'][$num];
+		$pfSense_instance[$num] = $config['pfSense']['local_port'][$num];
+		$pfSense_instance[$num] = $config['pfSense']['URL'][$num];
+		$pfSense_instance[$num] = $config['pfSense']['local_ip'][$num];
+		$pfSense_instance[$num] = $config['pfSense']['username'][$num];
+		$pfSense_instance[$num] = $config['pfSense']['password'][$num];
 }
-
 // pfSense
 /*
 $pfSense_server_name = $config['services']['pfSense']['server_name'];
@@ -64,6 +65,7 @@ $pfSense_username = $config['services']['pfSense']['username'];
 $pfSense_password = $config['services']['pfSense']['password'];
 $pfSense_URL = $config['services']['pfSense']['URL'];
 */
+/*
 // plex
 $plex_ip = $config['services']['plex']['local_ip'];
 $plex_port = $config['services']['plex']['local_port'];
@@ -94,6 +96,7 @@ $sickbeard_username = $config['services']['sickbeard']['username'];
 $sickbeard_password = $config['services']['sickbeard']['password'];
 $sickbeard_URL = $config['services']['sickbeard']['URL'];
 
+*/
 // storage
 $volume_names[] = $config['storage']['volume_name'];
 $volume_paths[] = $config['storage']['volume_path'];
@@ -112,10 +115,10 @@ global $sickbeard_server_name;
 global $sabnzbd_server_name;
 global $minecraft_server_name;
 
-global $pfSense_ip;
-global $pfSense_URL;
-global $pfSense_username;
-global $pfSense_password;
+//global $pfSense_ip;
+//global $pfSense_URL;
+//global $pfSense_username;
+//global $pfSense_password;
 global $local_server_ip;
 global $wan_domain;
 global $plex_ip;

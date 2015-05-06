@@ -38,7 +38,7 @@ $services = array(
 );
 
 foreach ($pfSense_instance as $instance) {
-	$services += new service($instance[0],$instance[1],$instance[2],$instance[3]);
+	$services = new service($instance[0],$instance[1],$instance[2],$instance[3]);
 }
 
 /*

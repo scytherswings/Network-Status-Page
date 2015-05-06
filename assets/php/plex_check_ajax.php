@@ -5,9 +5,9 @@
 
 	$plexSessionXML = simplexml_load_file('http://'.$plex_ip.':'.$plex_port.'/status/sessions');
 	$plexcheckfile1 = ROOT_DIR . '/assets/caches/plexcheckfile1.txt';
-	$plexcheckfile2 = ROOT_DIR . '/assets/caches/plexcheckfile2.txt';
+	//$plexcheckfile2 = ROOT_DIR . '/assets/caches/plexcheckfile2.txt';
 	$plexcheckfile1_md5 = md5_file($plexcheckfile1);
-	$plexcheckfile2_md5 = md5_file($plexcheckfile2);
+	//$plexcheckfile2_md5 = md5_file($plexcheckfile2);
 	$viewers = 0;
 
 	// See if Plex Media Server is online and how many people are watching.

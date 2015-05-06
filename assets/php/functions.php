@@ -1,6 +1,11 @@
 <?php
 
-$config_path = "../../config.ini"; //path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
+
+// You should move the config.ini outside the web directory.
+$config_path = "../../config.ini"; // Path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
+// Don't forget to make sure this is set properly...
+
+
 
 Ini_Set( 'display_errors', false);
 include '../../init.php';
@@ -8,10 +13,6 @@ include 'lib/phpseclib0.3.5/Net/SSH2.php';
 require_once 'MinecraftServerStatus.class.php';
 
 $config = parse_ini_file($config_path, true);
-#$config = parse_ini_file($config_path);
-#foreach ($config as $section) {
-#	echo "<p>$section</p>";
-#}
 
 // Import variables from config file
 // Network Details
@@ -21,16 +22,26 @@ $wan1_ip = $config['network_details']['wan1_ip'];
 $wan2_ip = $config['network_details']['wan2_ip'];
 $ping_ip = $config['network_details']['ping_ip'];
 
-// Misc
-$cpu_cores = $config['misc']['cpu_cores'];
-$trakt_username = $config['misc']['trakt_username'];
-
 // Weather
 $weather_always_display = $config['weather']['weather_always_display'];
 $weather_lat = $config['weather']['weather_lat'];
 $weather_long = $config['weather']['weather_long'];
 $weather_name = $config['weather']['weather_name'];
 $forecast_api = $config['weather']['forecast_api'];
+
+// Misc
+$trakt_username = $config['misc']['trakt_username'];
+if (isset($config['misc']['cpu_cores'])) {
+	$cpu_cores = $config['misc']['cpu_cores'];
+}
+else {
+	$cpu_cores = num_cpus();
+}
+
+// storage
+$volume_names[] = $config['storage']['volume_name'];
+$volume_paths[] = $config['storage']['volume_path'];
+
 
 // Services
 $pfSense_config_lines = 6;
@@ -193,57 +204,15 @@ $service_instances = array(
 	$minecraft_instances
 	);
 
-// pfSense
+
+
+
+
+
+
+
+
 /*
-$pfSense_server_name = $config['services']['pfSense']['server_name'];
-$pfSense_ip = $config['services']['pfSense']['local_ip'];
-$pfSense_username = $config['services']['pfSense']['username'];
-$pfSense_password = $config['services']['pfSense']['password'];
-$pfSense_URL = $config['services']['pfSense']['URL'];
-*/
-/*
-// plex
-$plex_ip = $config['services']['plex']['local_ip'];
-$plex_port = $config['services']['plex']['local_port'];
-$plex_username = $config['services']['plex']['username'];
-$plex_password = $config['services']['plex']['password'];
-$plex_URL = $config['services']['plex']['URL'];
-
-// SABnzbd+
-$sabnzbd_ip = $config['services']['sabnzbd']['local_ip'];
-$sabnzbd_port = $config['services']['sabnzbd']['local_port'];
-$sabnzbd_URL = $config['services']['sabnzbd']['URL'];
-$sabnzbd_api = $config['services']['sabnzbd']['api'];
-$ping_throttle = $config['services']['sabnzbd']['ping_throttle'];
-$sabnabdSpeedLimitMax = $config['services']['sabnzbd']['sabSpeedLimitMax'];
-$sabnzbdSpeedLimitMin = $config['services']['sabnzbd']['sabSpeedLimitMin'];
-
-// couchpotato
-$couchpotato_ip = $config['services']['couchpotato']['local_ip'];
-$couchpotato_port = $config['services']['couchpotato']['local_port'];
-$couchpotato_username = $config['services']['couchpotato']['username'];
-$couchpotato_password = $config['services']['couchpotato']['password'];
-$couchpotato_URL = $config['services']['couchpotato']['URL'];
-
-// sickbeard
-$sickbeard_ip = $config['services']['sickbeard']['local_ip'];
-$sickbeard_port = $config['services']['sickbeard']['local_port'];
-$sickbeard_username = $config['services']['sickbeard']['username'];
-$sickbeard_password = $config['services']['sickbeard']['password'];
-$sickbeard_URL = $config['services']['sickbeard']['URL'];
-
-*/
-// storage
-$volume_names[] = $config['storage']['volume_name'];
-$volume_paths[] = $config['storage']['volume_path'];
-
-
-
-
-
-
-
-
 // Global variable declarations
 global $plex_server_name;
 global $couchpotato_server_name;
@@ -278,7 +247,7 @@ global $sickbeard_port;
 global $sickbeard_username;
 global $sickbeard_password;
 global $sickbeard_URL;
-
+*/
 // Set the path for the Plex Token
 $plexTokenCache = ROOT_DIR . '/assets/caches/plex_token.txt';
 // Check to see if the plex token exists and is younger than one week
@@ -316,6 +285,63 @@ function makeCpuBars()
 {
 	printBar(getCpuUsage(), "Usage");
 }	
+
+// The below function's copyright information:
+/**
+ * Copyright © 2011 Erin Millard
+ */
+
+/**
+ * Returns the number of available CPU cores
+ * 
+ *  Should work for Linux, Windows, Mac & BSD
+ * 
+ * @return integer 
+ */
+ 
+function num_cpus()
+{
+  $numCpus = 1;
+
+  if (is_file('/proc/cpuinfo'))
+  {
+    $cpuinfo = file_get_contents('/proc/cpuinfo');
+    preg_match_all('/^processor/m', $cpuinfo, $matches);
+
+    $numCpus = count($matches[0]);
+  }
+  else if ('WIN' == strtoupper(substr(PHP_OS, 0, 3)))
+  {
+    $process = @popen('wmic cpu get NumberOfCores', 'rb');
+
+    if (false !== $process)
+    {
+      fgets($process);
+      $numCpus = intval(fgets($process));
+
+      pclose($process);
+    }
+  }
+  else
+  {
+    $process = @popen('sysctl -a', 'rb');
+
+    if (false !== $process)
+    {
+      $output = stream_get_contents($process);
+
+      preg_match('/hw.ncpu: (\d+)/', $output, $matches);
+      if ($matches)
+      {
+        $numCpus = intval($matches[1][0]);
+      }
+
+      pclose($process);
+    }
+  }
+  
+  return $numCpus;
+}
 
 function makeTotalDiskSpace()
 {
@@ -586,7 +612,7 @@ function getNetwork()
 	global $wan_domain;
 	global $plex_ip;
     #global $isRFCSpace;
-
+	
     $isRFCSpace = preg_match("/(^10\.)|(^127\.0\.0\.1)|(^192\.168\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)/", get_client_ip());
 	if($isRFCSpace):
 		$network='http://'.$plex_ip;

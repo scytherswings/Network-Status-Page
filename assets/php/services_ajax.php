@@ -47,7 +47,7 @@ function add_service($instances) {
 	global $services;
 	
 	foreach ($instances as $instance) {
-		$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance[2]),array_values($instance)[3]);
+		$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance)[2],array_values($instance)[3]);
 		$services[] = $temp_object;
 	}
 }

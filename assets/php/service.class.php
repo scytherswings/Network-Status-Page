@@ -7,7 +7,7 @@ class service
 	public $host;
 	public $status;
 	
-	function __construct($name, $port, $url = "", $host = "localhost")
+	function __construct($name, $port, $url = '', $host = "localhost")
 	{
 		$this->name = $name;
 		$this->port = $port;

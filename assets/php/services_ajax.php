@@ -36,9 +36,11 @@ $services = array(
 	//new serviceMinecraft("Vanilla", 25564, "http://minecraft.d4rk.co", "mc.d4rk.co"),
 	//new serviceMinecraft("Bevo Tech Pack", 25565, "http://minecraft.d4rk.co")
 );
-
+//echo $pfSense_instance;
 foreach ($pfSense_instance as $instance) {
-	$services = new service($instance[0],$instance[1],$instance[2],$instance[3]);
+	echo $instance;
+	$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance[2]),array_values($instance)[3]);
+	$services[] = $temp_object;
 }
 
 /*

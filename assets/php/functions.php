@@ -41,21 +41,22 @@ $sickbeard_config_lines = 6;
 $minecraft_config_lines = 4;
 
 global $pfSense_instance;
+$pfSense_instance = array();
 
 $pfSense_config_line_count = count($config['pfSense']);
 //echo $pfSense_config_line_count;
 
 for ($i=1; $i <= $pfSense_config_lines; $i++) {
 		$num = (ceil($i/$pfSense_config_lines));
-		echo " pfsense_lines".$pfSense_config_lines;
-		echo " i value".$i;
-		echo " number".$num;
-		$pfSense_instance[$num] = $config['pfSense']['server_name'][$num];
-		$pfSense_instance[$num] = $config['pfSense']['local_port'][$num];
-		$pfSense_instance[$num] = $config['pfSense']['URL'][$num];
-		$pfSense_instance[$num] = $config['pfSense']['local_ip'][$num];
-		$pfSense_instance[$num] = $config['pfSense']['username'][$num];
-		$pfSense_instance[$num] = $config['pfSense']['password'][$num];
+		//echo " pfsense_lines".$pfSense_config_lines;
+		//echo " i value".$i;
+		//echo " number".$num;
+		$pfSense_instance[$num][1] = $config['pfSense']['server_name'][$num];
+		$pfSense_instance[$num][2] = $config['pfSense']['local_port'][$num];
+		$pfSense_instance[$num][3] = $config['pfSense']['URL'][$num];
+		$pfSense_instance[$num][4] = $config['pfSense']['local_ip'][$num];
+		$pfSense_instance[$num][5] = $config['pfSense']['username'][$num];
+		$pfSense_instance[$num][6] = $config['pfSense']['password'][$num];
 }
 // pfSense
 /*

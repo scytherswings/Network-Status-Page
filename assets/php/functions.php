@@ -735,6 +735,7 @@ function makeRecenlyViewed()
 	
 			}
 		}
+		/*
 		// This checks to see if you are inside your local network. If you are it gives you the forecast as well.
 		if($clientIP != getNetwork($clientIP) && count($plexSessionXML->Video) == 0) {
 			echo '<hr>';
@@ -743,6 +744,7 @@ function makeRecenlyViewed()
 			echo '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat='.$weather_lat.'&lon='.$weather_long.'&name='.$weather_name.'"> </iframe>';
 		}
 		echo '</div>';
+		*/
 	}
 }
 

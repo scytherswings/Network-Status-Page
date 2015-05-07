@@ -3,6 +3,12 @@
 	include '../../init.php';
 	include 'functions.php';
 
+global $plex_instances;
+foreach ($plex_instances as $instance) {
+	
+	$plex_port = $instance[1];
+	$network = getNetwork($instance[3]);
+	
 	$plexSessionXML = simplexml_load_file('http://'.$plex_ip.':'.$plex_port.'/status/sessions');
 	$plexcheckfile1 = ROOT_DIR . '/assets/caches/plexcheckfile1.txt';
 	//$plexcheckfile2 = ROOT_DIR . '/assets/caches/plexcheckfile2.txt';
@@ -39,4 +45,5 @@
 		// If they are different, update plexcheckfile2
 		file_put_contents($plexcheckfile2, $array, LOCK_EX);
 	}
+}
 ?>

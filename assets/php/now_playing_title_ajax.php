@@ -17,8 +17,9 @@ foreach ($plex_instances as $instance) {
     echo " instance var 2".$instance[2];
     echo " instance var 3".$instance[3];
     echo " instance var 4".$instance[4];
-	$network = getNetwork($instance[3]);
-    */
+	*/
+    $network = getNetwork($instance[3]);
+
 	$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
 
 	// See if Plex Media Server is online and how many people are watching.

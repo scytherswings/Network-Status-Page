@@ -47,6 +47,16 @@ function add_service($instances) {
 	global $services;
 	
 	foreach ($instances as $instance) {
+        /*
+        echo " instance var 0 ".$instance[0];
+        echo " instance var 1 ".$instance[1];
+        echo " instance var 2 ".$instance[2];
+        echo " instance var 3 ".$instance[3];
+        echo " instance var 4 ".$instance[4];
+        echo " instance var 4 ".$instance[5];
+        echo " instance var 4 ".$instance[6];
+        echo " instance var 4 ".$instance[7];
+        */
 		$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance)[2],array_values($instance)[3]);
 		$services[] = $temp_object;
 	}

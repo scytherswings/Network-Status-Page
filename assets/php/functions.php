@@ -2,7 +2,7 @@
 
 
 // You should move the config.ini outside the web directory.
-$config_path = "../../config.ini"; // Path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
+$config_path = "/opt/config/config.ini"; // Path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
 // Don't forget to make sure this is set properly...
 
 
@@ -72,12 +72,12 @@ if (isset($config['pfSense'])) {
 	if ($pfSense_config_line_count >= $pfSense_config_lines){
 		for ($i=1; $i <= $pfSense_config_line_count; $i++) {
 			$num = ceil($i/$pfSense_config_lines);
-			$pfSense_instances[$num][1] = $config['pfSense']['server_name'][$num];
-			$pfSense_instances[$num][2] = $config['pfSense']['local_port'][$num];
-			$pfSense_instances[$num][3] = $config['pfSense']['URL'][$num];
-			$pfSense_instances[$num][4] = $config['pfSense']['local_ip'][$num];
-			$pfSense_instances[$num][5] = $config['pfSense']['username'][$num];
-			$pfSense_instances[$num][6] = $config['pfSense']['password'][$num];
+			$pfSense_instances[$num][0] = $config['pfSense']['server_name'][$num];
+			$pfSense_instances[$num][1] = $config['pfSense']['local_port'][$num];
+			$pfSense_instances[$num][2] = $config['pfSense']['URL'][$num];
+			$pfSense_instances[$num][3] = $config['pfSense']['local_ip'][$num];
+			$pfSense_instances[$num][4] = $config['pfSense']['username'][$num];
+			$pfSense_instances[$num][5] = $config['pfSense']['password'][$num];
 		}
 	}
 	else {
@@ -93,12 +93,12 @@ if (isset($config['plex'])) {
 	if ($plex_config_line_count >= $plex_config_lines){
 		for ($i=1; $i <= $plex_config_line_count; $i++) {
 			$num = ceil($i/$plex_config_lines);
-			$plex_instances[$num][1] = $config['plex']['server_name'][$num];
-			$plex_instances[$num][2] = $config['plex']['local_port'][$num];
-			$plex_instances[$num][3] = $config['plex']['URL'][$num];
-			$plex_instances[$num][4] = $config['plex']['local_ip'][$num];
-			$plex_instances[$num][5] = $config['plex']['username'][$num];
-			$plex_instances[$num][6] = $config['plex']['password'][$num];
+			$plex_instances[$num][0] = $config['plex']['server_name'][$num];
+			$plex_instances[$num][1] = $config['plex']['local_port'][$num];
+			$plex_instances[$num][2] = $config['plex']['URL'][$num];
+			$plex_instances[$num][3] = $config['plex']['local_ip'][$num];
+			$plex_instances[$num][4] = $config['plex']['username'][$num];
+			$plex_instances[$num][5] = $config['plex']['password'][$num];
 		}
 	}
 	else {
@@ -113,12 +113,12 @@ if (isset($config['couchpotato'])) {
 	if ($couchpotato_config_line_count >= $couchpotato_config_lines) {
 		for ($i=1; $i <= $couchpotato_config_line_count; $i++) {
 			$num = ceil($i/$couchpotato_config_lines);
-			$couchpotato_instances[$num][1] = $config['couchpotato']['server_name'][$num];
-			$couchpotato_instances[$num][2] = $config['couchpotato']['local_port'][$num];
-			$couchpotato_instances[$num][3] = $config['couchpotato']['URL'][$num];
-			$couchpotato_instances[$num][4] = $config['couchpotato']['local_ip'][$num];
-			$couchpotato_instances[$num][5] = $config['couchpotato']['username'][$num];
-			$couchpotato_instances[$num][6] = $config['couchpotato']['password'][$num];
+			$couchpotato_instances[$num][0] = $config['couchpotato']['server_name'][$num];
+			$couchpotato_instances[$num][1] = $config['couchpotato']['local_port'][$num];
+			$couchpotato_instances[$num][2] = $config['couchpotato']['URL'][$num];
+			$couchpotato_instances[$num][3] = $config['couchpotato']['local_ip'][$num];
+			$couchpotato_instances[$num][4] = $config['couchpotato']['username'][$num];
+			$couchpotato_instances[$num][5] = $config['couchpotato']['password'][$num];
 		}
 	}
 	else {
@@ -133,12 +133,12 @@ if (isset($config['sickbeard'])) {
 	if ($sickbeard_config_line_count >= $sickbeard_config_lines) {
 		for ($i=1; $i <= $sickbeard_config_line_count; $i++) {
 			$num = ceil($i/$sickbeard_config_lines);
-			$sickbeard_instances[$num][1] = $config['sickbeard']['server_name'][$num];
-			$sickbeard_instances[$num][2] = $config['sickbeard']['local_port'][$num];
-			$sickbeard_instances[$num][3] = $config['sickbeard']['URL'][$num];
-			$sickbeard_instances[$num][4] = $config['sickbeard']['local_ip'][$num];
-			$sickbeard_instances[$num][5] = $config['sickbeard']['username'][$num];
-			$sickbeard_instances[$num][6] = $config['sickbeard']['password'][$num];
+			$sickbeard_instances[$num][0] = $config['sickbeard']['server_name'][$num];
+			$sickbeard_instances[$num][1] = $config['sickbeard']['local_port'][$num];
+			$sickbeard_instances[$num][2] = $config['sickbeard']['URL'][$num];
+			$sickbeard_instances[$num][3] = $config['sickbeard']['local_ip'][$num];
+			$sickbeard_instances[$num][4] = $config['sickbeard']['username'][$num];
+			$sickbeard_instances[$num][5] = $config['sickbeard']['password'][$num];
 		}
 	}
 	else {
@@ -154,10 +154,10 @@ if (isset($config['minecraft'])) {
 	if ($minecraft_config_line_count >= $minecraft_config_lines) {
 		for ($i=1; $i <= $minecraft_config_line_count; $i++) {
 			$num = ceil($i/$minecraft_config_lines);
-			$minecraft_instances[$num][1] = $config['minecraft']['server_name'][$num];
-			$minecraft_instances[$num][2] = $config['minecraft']['local_port'][$num];
-			$minecraft_instances[$num][3] = $config['minecraft']['URL'][$num];
-			$minecraft_instances[$num][4] = $config['minecraft']['local_ip'][$num];
+			$minecraft_instances[$num][0] = $config['minecraft']['server_name'][$num];
+			$minecraft_instances[$num][1] = $config['minecraft']['local_port'][$num];
+			$minecraft_instances[$num][2] = $config['minecraft']['URL'][$num];
+			$minecraft_instances[$num][3] = $config['minecraft']['local_ip'][$num];
 		}
 	}
 	else {
@@ -172,12 +172,12 @@ if (isset($config['deluge'])) {
 	if ($deluge_config_line_count >= $deluge_config_lines) {	
 		for ($i=1; $i <= $deluge_config_line_count; $i++) {
 			$num = ceil($i/$deluge_config_lines);
-			$deluge_instances[$num][1] = $config['deluge']['server_name'][$num];
-			$deluge_instances[$num][2] = $config['deluge']['local_port'][$num];
-			$deluge_instances[$num][3] = $config['deluge']['URL'][$num];
-			$deluge_instances[$num][4] = $config['deluge']['local_ip'][$num];
-			$deluge_instances[$num][5] = $config['deluge']['username'][$num];
-			$deluge_instances[$num][6] = $config['deluge']['password'][$num];
+			$deluge_instances[$num][0] = $config['deluge']['server_name'][$num];
+			$deluge_instances[$num][1] = $config['deluge']['local_port'][$num];
+			$deluge_instances[$num][2] = $config['deluge']['URL'][$num];
+			$deluge_instances[$num][3] = $config['deluge']['local_ip'][$num];
+			$deluge_instances[$num][4] = $config['deluge']['username'][$num];
+			$deluge_instances[$num][5] = $config['deluge']['password'][$num];
 		}
 	}
 	else {
@@ -192,14 +192,14 @@ if (isset($config['sabnzbd'])) {
 	if ($sabnzbd_config_line_count >= $sabnzbd_config_lines) {
 		for ($i=1; $i <= $sabnzbd_config_line_count; $i++) {
 			$num = ceil($i/$sabnzbd_config_lines);
-			$sabnzbd_instances[$num][1] = $config['sabnzbd']['server_name'][$num];
-			$sabnzbd_instances[$num][2] = $config['sabnzbd']['local_port'][$num];
-			$sabnzbd_instances[$num][3] = $config['sabnzbd']['URL'][$num];
-			$sabnzbd_instances[$num][4] = $config['sabnzbd']['local_ip'][$num];
-			$sabnzbd_instances[$num][5] = $config['sabnzbd']['api'][$num];
-			$sabnzbd_instances[$num][6] = $config['sabnzbd']['sabSpeedLimitMax'][$num];
-			$sabnzbd_instances[$num][7] = $config['sabnzbd']['sabSpeedLimitMin'][$num];
-			$sabnzbd_instances[$num][8] = $config['sabnzbd']['ping_throttle'][$num];
+			$sabnzbd_instances[$num][0] = $config['sabnzbd']['server_name'][$num];
+			$sabnzbd_instances[$num][1] = $config['sabnzbd']['local_port'][$num];
+			$sabnzbd_instances[$num][2] = $config['sabnzbd']['URL'][$num];
+			$sabnzbd_instances[$num][3] = $config['sabnzbd']['local_ip'][$num];
+			$sabnzbd_instances[$num][4] = $config['sabnzbd']['api'][$num];
+			$sabnzbd_instances[$num][5] = $config['sabnzbd']['sabSpeedLimitMax'][$num];
+			$sabnzbd_instances[$num][6] = $config['sabnzbd']['sabSpeedLimitMin'][$num];
+			$sabnzbd_instances[$num][7] = $config['sabnzbd']['ping_throttle'][$num];
 		}
 	}
 	else {
@@ -623,7 +623,7 @@ function getNetwork($plex_ip)
 {
 	// It should be noted that this function is designed specifically for getting the local / wan name for Plex.
 	global $wan_domain;
-	global $plex_ip;
+	//global $plex_ip;
     #global $isRFCSpace;
 	
     $isRFCSpace = preg_match("/(^10\.)|(^127\.0\.0\.1)|(^192\.168\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)/", get_client_ip());
@@ -750,6 +750,7 @@ function makeRecenlyViewed()
 
 function makeRecenlyReleased()
 {
+    global $plex_instances;
 	foreach ($plex_instances as $instance) {
 		$plex_port = $instance[1];
 		$network = getNetwork($instance[3]);

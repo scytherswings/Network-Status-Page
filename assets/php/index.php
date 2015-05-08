@@ -2,7 +2,8 @@
 <?php
 	Error_Reporting( E_ALL | E_STRICT );
 	Ini_Set( 'display_errors', true);
-	include 'init.php';
+    require_once ('init.php');
+	//include 'init.php';
 	include ROOT_DIR . '/assets/php/Mobile_Detect.php';
 #	include_once(ROOT_DIR . "/assets/php/analyticstracking.php");
 

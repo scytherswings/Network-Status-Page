@@ -8,7 +8,7 @@ $config_path = "/opt/config/config.ini"; // Path to config file, replace the exp
 
 
 Ini_Set( 'display_errors', false);
-include '../../init.php';
+include 'init.php';
 include 'lib/phpseclib0.3.5/Net/SSH2.php';
 require_once 'MinecraftServerStatus.class.php';
 
@@ -756,7 +756,7 @@ function makeRecenlyReleased()
 		$network = getNetwork($instance[3]);
 		$clientIP = get_client_ip();
 		// Various items are commented out as I was playing with what information to include.
-		$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/7/newest');
+		$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/3/newest'); //the number relates to how many libraries you have..i think..
 		
 		//echo '<div class="col-md-10 col-sm-offset-1">';
 		echo '<div class="col-md-12">';

@@ -2,13 +2,13 @@
 
 
 // You should move the config.ini outside the web directory.
-$config_path = "../../config.ini"; // Path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
+$config_path = "/opt/config/config.ini"; // Path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
 // Don't forget to make sure this is set properly...
 
 
 
 Ini_Set( 'display_errors', false);
-include '../../init.php';
+include 'init.php';
 include 'lib/phpseclib0.3.5/Net/SSH2.php';
 require_once 'MinecraftServerStatus.class.php';
 
@@ -52,6 +52,19 @@ $sickbeard_config_lines = 6;
 $minecraft_config_lines = 4;
 $deluge_config_lines = 6;
 
+global	$pfSense_instances;
+global	$plex_instances;
+global	$couchpotato_instances;
+global	$sickbeard_instances;
+global	$sabnzbd_instances;
+global	$deluge_instances;
+global	$minecraft_instances;
+
+
+
+
+
+
 //global $pfSense_instances;
 $pfSense_instances = array();
 if (isset($config['pfSense'])) {
@@ -59,12 +72,12 @@ if (isset($config['pfSense'])) {
 	if ($pfSense_config_line_count >= $pfSense_config_lines){
 		for ($i=1; $i <= $pfSense_config_line_count; $i++) {
 			$num = ceil($i/$pfSense_config_lines);
-			$pfSense_instances[$num][1] = $config['pfSense']['server_name'][$num];
-			$pfSense_instances[$num][2] = $config['pfSense']['local_port'][$num];
-			$pfSense_instances[$num][3] = $config['pfSense']['URL'][$num];
-			$pfSense_instances[$num][4] = $config['pfSense']['local_ip'][$num];
-			$pfSense_instances[$num][5] = $config['pfSense']['username'][$num];
-			$pfSense_instances[$num][6] = $config['pfSense']['password'][$num];
+			$pfSense_instances[$num][0] = $config['pfSense']['server_name'][$num];
+			$pfSense_instances[$num][1] = $config['pfSense']['local_port'][$num];
+			$pfSense_instances[$num][2] = $config['pfSense']['URL'][$num];
+			$pfSense_instances[$num][3] = $config['pfSense']['local_ip'][$num];
+			$pfSense_instances[$num][4] = $config['pfSense']['username'][$num];
+			$pfSense_instances[$num][5] = $config['pfSense']['password'][$num];
 		}
 	}
 	else {
@@ -80,12 +93,12 @@ if (isset($config['plex'])) {
 	if ($plex_config_line_count >= $plex_config_lines){
 		for ($i=1; $i <= $plex_config_line_count; $i++) {
 			$num = ceil($i/$plex_config_lines);
-			$plex_instances[$num][1] = $config['plex']['server_name'][$num];
-			$plex_instances[$num][2] = $config['plex']['local_port'][$num];
-			$plex_instances[$num][3] = $config['plex']['URL'][$num];
-			$plex_instances[$num][4] = $config['plex']['local_ip'][$num];
-			$plex_instances[$num][5] = $config['plex']['username'][$num];
-			$plex_instances[$num][6] = $config['plex']['password'][$num];
+			$plex_instances[$num][0] = $config['plex']['server_name'][$num];
+			$plex_instances[$num][1] = $config['plex']['local_port'][$num];
+			$plex_instances[$num][2] = $config['plex']['URL'][$num];
+			$plex_instances[$num][3] = $config['plex']['local_ip'][$num];
+			$plex_instances[$num][4] = $config['plex']['username'][$num];
+			$plex_instances[$num][5] = $config['plex']['password'][$num];
 		}
 	}
 	else {
@@ -100,12 +113,12 @@ if (isset($config['couchpotato'])) {
 	if ($couchpotato_config_line_count >= $couchpotato_config_lines) {
 		for ($i=1; $i <= $couchpotato_config_line_count; $i++) {
 			$num = ceil($i/$couchpotato_config_lines);
-			$couchpotato_instances[$num][1] = $config['couchpotato']['server_name'][$num];
-			$couchpotato_instances[$num][2] = $config['couchpotato']['local_port'][$num];
-			$couchpotato_instances[$num][3] = $config['couchpotato']['URL'][$num];
-			$couchpotato_instances[$num][4] = $config['couchpotato']['local_ip'][$num];
-			$couchpotato_instances[$num][5] = $config['couchpotato']['username'][$num];
-			$couchpotato_instances[$num][6] = $config['couchpotato']['password'][$num];
+			$couchpotato_instances[$num][0] = $config['couchpotato']['server_name'][$num];
+			$couchpotato_instances[$num][1] = $config['couchpotato']['local_port'][$num];
+			$couchpotato_instances[$num][2] = $config['couchpotato']['URL'][$num];
+			$couchpotato_instances[$num][3] = $config['couchpotato']['local_ip'][$num];
+			$couchpotato_instances[$num][4] = $config['couchpotato']['username'][$num];
+			$couchpotato_instances[$num][5] = $config['couchpotato']['password'][$num];
 		}
 	}
 	else {
@@ -120,12 +133,12 @@ if (isset($config['sickbeard'])) {
 	if ($sickbeard_config_line_count >= $sickbeard_config_lines) {
 		for ($i=1; $i <= $sickbeard_config_line_count; $i++) {
 			$num = ceil($i/$sickbeard_config_lines);
-			$sickbeard_instances[$num][1] = $config['sickbeard']['server_name'][$num];
-			$sickbeard_instances[$num][2] = $config['sickbeard']['local_port'][$num];
-			$sickbeard_instances[$num][3] = $config['sickbeard']['URL'][$num];
-			$sickbeard_instances[$num][4] = $config['sickbeard']['local_ip'][$num];
-			$sickbeard_instances[$num][5] = $config['sickbeard']['username'][$num];
-			$sickbeard_instances[$num][6] = $config['sickbeard']['password'][$num];
+			$sickbeard_instances[$num][0] = $config['sickbeard']['server_name'][$num];
+			$sickbeard_instances[$num][1] = $config['sickbeard']['local_port'][$num];
+			$sickbeard_instances[$num][2] = $config['sickbeard']['URL'][$num];
+			$sickbeard_instances[$num][3] = $config['sickbeard']['local_ip'][$num];
+			$sickbeard_instances[$num][4] = $config['sickbeard']['username'][$num];
+			$sickbeard_instances[$num][5] = $config['sickbeard']['password'][$num];
 		}
 	}
 	else {
@@ -141,10 +154,10 @@ if (isset($config['minecraft'])) {
 	if ($minecraft_config_line_count >= $minecraft_config_lines) {
 		for ($i=1; $i <= $minecraft_config_line_count; $i++) {
 			$num = ceil($i/$minecraft_config_lines);
-			$minecraft_instances[$num][1] = $config['minecraft']['server_name'][$num];
-			$minecraft_instances[$num][2] = $config['minecraft']['local_port'][$num];
-			$minecraft_instances[$num][3] = $config['minecraft']['URL'][$num];
-			$minecraft_instances[$num][4] = $config['minecraft']['local_ip'][$num];
+			$minecraft_instances[$num][0] = $config['minecraft']['server_name'][$num];
+			$minecraft_instances[$num][1] = $config['minecraft']['local_port'][$num];
+			$minecraft_instances[$num][2] = $config['minecraft']['URL'][$num];
+			$minecraft_instances[$num][3] = $config['minecraft']['local_ip'][$num];
 		}
 	}
 	else {
@@ -159,12 +172,12 @@ if (isset($config['deluge'])) {
 	if ($deluge_config_line_count >= $deluge_config_lines) {	
 		for ($i=1; $i <= $deluge_config_line_count; $i++) {
 			$num = ceil($i/$deluge_config_lines);
-			$deluge_instances[$num][1] = $config['deluge']['server_name'][$num];
-			$deluge_instances[$num][2] = $config['deluge']['local_port'][$num];
-			$deluge_instances[$num][3] = $config['deluge']['URL'][$num];
-			$deluge_instances[$num][4] = $config['deluge']['local_ip'][$num];
-			$deluge_instances[$num][5] = $config['deluge']['username'][$num];
-			$deluge_instances[$num][6] = $config['deluge']['password'][$num];
+			$deluge_instances[$num][0] = $config['deluge']['server_name'][$num];
+			$deluge_instances[$num][1] = $config['deluge']['local_port'][$num];
+			$deluge_instances[$num][2] = $config['deluge']['URL'][$num];
+			$deluge_instances[$num][3] = $config['deluge']['local_ip'][$num];
+			$deluge_instances[$num][4] = $config['deluge']['username'][$num];
+			$deluge_instances[$num][5] = $config['deluge']['password'][$num];
 		}
 	}
 	else {
@@ -179,14 +192,14 @@ if (isset($config['sabnzbd'])) {
 	if ($sabnzbd_config_line_count >= $sabnzbd_config_lines) {
 		for ($i=1; $i <= $sabnzbd_config_line_count; $i++) {
 			$num = ceil($i/$sabnzbd_config_lines);
-			$sabnzbd_instances[$num][1] = $config['sabnzbd']['server_name'][$num];
-			$sabnzbd_instances[$num][2] = $config['sabnzbd']['local_port'][$num];
-			$sabnzbd_instances[$num][3] = $config['sabnzbd']['URL'][$num];
-			$sabnzbd_instances[$num][4] = $config['sabnzbd']['local_ip'][$num];
-			$sabnzbd_instances[$num][5] = $config['sabnzbd']['api'][$num];
-			$sabnzbd_instances[$num][6] = $config['sabnzbd']['sabSpeedLimitMax'][$num];
-			$sabnzbd_instances[$num][7] = $config['sabnzbd']['sabSpeedLimitMin'][$num];
-			$sabnzbd_instances[$num][8] = $config['sabnzbd']['ping_throttle'][$num];
+			$sabnzbd_instances[$num][0] = $config['sabnzbd']['server_name'][$num];
+			$sabnzbd_instances[$num][1] = $config['sabnzbd']['local_port'][$num];
+			$sabnzbd_instances[$num][2] = $config['sabnzbd']['URL'][$num];
+			$sabnzbd_instances[$num][3] = $config['sabnzbd']['local_ip'][$num];
+			$sabnzbd_instances[$num][4] = $config['sabnzbd']['api'][$num];
+			$sabnzbd_instances[$num][5] = $config['sabnzbd']['sabSpeedLimitMax'][$num];
+			$sabnzbd_instances[$num][6] = $config['sabnzbd']['sabSpeedLimitMin'][$num];
+			$sabnzbd_instances[$num][7] = $config['sabnzbd']['ping_throttle'][$num];
 		}
 	}
 	else {
@@ -606,11 +619,11 @@ function ping()
 	return $avgPing;
 }
 
-function getNetwork()
+function getNetwork($plex_ip)
 {
 	// It should be noted that this function is designed specifically for getting the local / wan name for Plex.
 	global $wan_domain;
-	global $plex_ip;
+	//global $plex_ip;
     #global $isRFCSpace;
 	
     $isRFCSpace = preg_match("/(^10\.)|(^127\.0\.0\.1)|(^192\.168\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)/", get_client_ip());
@@ -685,247 +698,267 @@ function sabSpeedAdjuster()
 
 function makeRecenlyViewed()
 {
-	global $pfSense_ip;
-	global $plex_port;
+	//global $pfSense_ip;
+	//global $plex_port;
 	global $trakt_username;
 	global $weather_lat;
 	global $weather_long;
 	global $weather_name;
-	$network = getNetwork();
-	$clientIP = get_client_ip();
-	$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
-	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
-	$traktThumb = 'assets/caches/thumbnails/all-tvthumb.jpg';
-
-	echo '<div class="col-md-12">';
-	echo '<a href="http://trakt.tv/user/'.$trakt_username.'" class="thumbnail">';
-	if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
-		// Trakt image is less than 15 minutes old.
-		// Don't refresh the image, just use the file as-is.
-		echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
-	} else {
-		// Either file doesn't exist or our cache is out of date,
-		// so check if the server has different data,
-		// if it does, load the data from our remote server and also save it over our cache for next time.
-		$thumbFromTrakt_md5 = md5_file($trakt_url);
-		$traktThumb_md5 = md5_file($traktThumb);
-		if ($thumbFromTrakt_md5 === $traktThumb_md5) {
+	global $plex_instances;
+	
+	foreach ($plex_instances as $instance) {
+		$plex_port = $instance[1];
+		$network = getNetwork($instance[3]);
+		$clientIP = get_client_ip();
+		$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
+		$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
+		$traktThumb = 'assets/caches/thumbnails/all-tvthumb.jpg';
+	
+		echo '<div class="col-md-12">';
+		echo '<a href="http://trakt.tv/user/'.$trakt_username.'" class="thumbnail">';
+		if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
+			// Trakt image is less than 15 minutes old.
+			// Don't refresh the image, just use the file as-is.
 			echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
 		} else {
-			$thumbFromTrakt = file_get_contents($trakt_url);
-			file_put_contents($traktThumb, $thumbFromTrakt, LOCK_EX);
-			echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
-
+			// Either file doesn't exist or our cache is out of date,
+			// so check if the server has different data,
+			// if it does, load the data from our remote server and also save it over our cache for next time.
+			$thumbFromTrakt_md5 = md5_file($trakt_url);
+			$traktThumb_md5 = md5_file($traktThumb);
+			if ($thumbFromTrakt_md5 === $traktThumb_md5) {
+				echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+			} else {
+				$thumbFromTrakt = file_get_contents($trakt_url);
+				file_put_contents($traktThumb, $thumbFromTrakt, LOCK_EX);
+				echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+	
+			}
 		}
+		/*
+		// This checks to see if you are inside your local network. If you are it gives you the forecast as well.
+		if($clientIP != getNetwork($clientIP) && count($plexSessionXML->Video) == 0) {
+			echo '<hr>';
+			echo '<h1 class="exoextralight" style="margin-top:5px;">';
+			echo 'Forecast</h1>';
+			echo '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat='.$weather_lat.'&lon='.$weather_long.'&name='.$weather_name.'"> </iframe>';
+		}
+		echo '</div>';
+		*/
 	}
-	// This checks to see if you are inside your local network. If you are it gives you the forecast as well.
-	if($clientIP == $pfSense_ip && count($plexSessionXML->Video) == 0) {
-		echo '<hr>';
-		echo '<h1 class="exoextralight" style="margin-top:5px;">';
-		echo 'Forecast</h1>';
-		echo '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat='.$weather_lat.'&lon='.$weather_long.'&name='.$weather_name.'"> </iframe>';
-	}
-	echo '</div>';
 }
 
 function makeRecenlyReleased()
 {
-	// Various items are commented out as I was playing with what information to include.
-	global $plex_port;
-	$network = getNetwork();
-	$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/7/newest');
-	
-	//echo '<div class="col-md-10 col-sm-offset-1">';
-	echo '<div class="col-md-12">';
-	echo '<div id="carousel-example-generic" class=" carousel slide">';
-	echo '<div class="thumbnail">';
-	echo '<!-- Wrapper for slides -->';
-	echo '<div class="carousel-inner">';
-	echo '<div class="item active">';
-	$mediaKey = $plexNewestXML->Video[0]['key'];
-	$mediaXML = simplexml_load_file($network.':'.$plex_port.$mediaKey);
-	$movieTitle = $mediaXML->Video['title'];
-	$movieArt = $mediaXML->Video['thumb'];
-	echo '<img src="plex.php?img='.urlencode($network.':'.$plex_port.$movieArt).'" alt="'.$movieTitle.'">';
-	echo '</div>'; // Close item div
-	$i=1;
-	for ( ; ; ) {
-		if($i==15) break;
-		$mediaKey = $plexNewestXML->Video[$i]['key'];
+    global $plex_instances;
+	foreach ($plex_instances as $instance) {
+		$plex_port = $instance[1];
+		$network = getNetwork($instance[3]);
+		$clientIP = get_client_ip();
+		// Various items are commented out as I was playing with what information to include.
+		$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/3/newest'); //the number relates to how many libraries you have..i think..
+		
+		//echo '<div class="col-md-10 col-sm-offset-1">';
+		echo '<div class="col-md-12">';
+		echo '<div id="carousel-example-generic" class=" carousel slide">';
+		echo '<div class="thumbnail">';
+		echo '<!-- Wrapper for slides -->';
+		echo '<div class="carousel-inner">';
+		echo '<div class="item active">';
+		$mediaKey = $plexNewestXML->Video[0]['key'];
 		$mediaXML = simplexml_load_file($network.':'.$plex_port.$mediaKey);
 		$movieTitle = $mediaXML->Video['title'];
 		$movieArt = $mediaXML->Video['thumb'];
-		$movieYear = $mediaXML->Video['year'];
-		echo '<div class="item">';
 		echo '<img src="plex.php?img='.urlencode($network.':'.$plex_port.$movieArt).'" alt="'.$movieTitle.'">';
-		//echo '<div class="carousel-caption">';
-		//echo '<h3>'.$movieTitle.$movieYear.'</h3>';
-		//echo '<p>Summary</p>';
-		//echo '</div>';
 		echo '</div>'; // Close item div
-		$i++;
+		$i=1;
+		for ( ; ; ) {
+			if($i==15) break;
+			$mediaKey = $plexNewestXML->Video[$i]['key'];
+			$mediaXML = simplexml_load_file($network.':'.$plex_port.$mediaKey);
+			$movieTitle = $mediaXML->Video['title'];
+			$movieArt = $mediaXML->Video['thumb'];
+			$movieYear = $mediaXML->Video['year'];
+			echo '<div class="item">';
+			echo '<img src="plex.php?img='.urlencode($network.':'.$plex_port.$movieArt).'" alt="'.$movieTitle.'">';
+			//echo '<div class="carousel-caption">';
+			//echo '<h3>'.$movieTitle.$movieYear.'</h3>';
+			//echo '<p>Summary</p>';
+			//echo '</div>';
+			echo '</div>'; // Close item div
+			$i++;
+		}
+		echo '</div>'; // Close carousel-inner div
+		echo '</div>'; // Close thumbnail div
+		echo '<!-- Controls -->';
+		echo '<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">';
+		//echo '<span class="glyphicon glyphicon-chevron-left"></span>';
+		echo '</a>';
+		echo '<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">';
+		//echo '<span class="glyphicon glyphicon-chevron-right"></span>';
+		echo '</a>';
+		echo '</div>'; // Close carousel slide div
+		echo '</div>'; // Close column div
 	}
-	echo '</div>'; // Close carousel-inner div
-	echo '</div>'; // Close thumbnail div
-	echo '<!-- Controls -->';
-	echo '<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">';
-	//echo '<span class="glyphicon glyphicon-chevron-left"></span>';
-	echo '</a>';
-	echo '<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">';
-	//echo '<span class="glyphicon glyphicon-chevron-right"></span>';
-	echo '</a>';
-	echo '</div>'; // Close carousel slide div
-	echo '</div>'; // Close column div
 }
 
 function makeNowPlaying()
 {
-	global $plex_port;
-	$network = getNetwork();
-	$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
-
-	if (!$plexSessionXML):
-		makeRecenlyViewed();
-	elseif (count($plexSessionXML->Video) == 0):
-		makeRecenlyReleased();
-	else:
-		$i = 0; // Initiate and assign a value to i & t
-		$t = 0; // T is the total amount of sessions
-		echo '<div class="col-md-10 col-sm-offset-1">';
-		//echo '<div class="col-md-12">';
-		foreach ($plexSessionXML->Video as $sessionInfo):
-			$t++;
-		endforeach;
-		foreach ($plexSessionXML->Video as $sessionInfo):
-			$mediaKey = $sessionInfo['key'];
-			$playerTitle = $sessionInfo->Player['title'];
-			$mediaXML = simplexml_load_file($network.':'.$plex_port.$mediaKey);
-			$type = $mediaXML->Video['type'];
-			echo '<div class="thumbnail">';
-			$i++; // Increment i every pass through the array
-			if ($type == "movie"):
-				// Build information for a movie
-				$movieArt = $mediaXML->Video['thumb'];
-				$movieTitle = $mediaXML->Video['title'];
-				$duration = $plexSessionXML->Video[$i-1]['duration'];
-				$viewOffset = $plexSessionXML->Video[$i-1]['viewOffset'];
-				$progress = sprintf('%.0f',($viewOffset / $duration) * 100);
-				$user = $plexSessionXML->Video[$i-1]->User['title'];
-				$device = $plexSessionXML->Video[$i-1]->Player['title'];
-				$state = $plexSessionXML->Video[$i-1]->Player['state'];
-				// Truncate movie summary if it's more than 50 words
-				if (countWords($mediaXML->Video['summary']) < 51):
-					$movieSummary = $mediaXML->Video['summary'];
+	global $plex_instances;
+	
+	foreach ($plex_instances as $instance) {
+		$plex_port = $instance[1];
+		$network = getNetwork($instance[3]);
+		$clientIP = get_client_ip();
+		$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
+	
+		if (!$plexSessionXML):
+			makeRecenlyViewed();
+		elseif (count($plexSessionXML->Video) == 0):
+			makeRecenlyReleased();
+		else:
+			$i = 0; // Initiate and assign a value to i & t
+			$t = 0; // T is the total amount of sessions
+			echo '<div class="col-md-10 col-sm-offset-1">';
+			//echo '<div class="col-md-12">';
+			foreach ($plexSessionXML->Video as $sessionInfo):
+				$t++;
+			endforeach;
+			foreach ($plexSessionXML->Video as $sessionInfo):
+				$mediaKey = $sessionInfo['key'];
+				$playerTitle = $sessionInfo->Player['title'];
+				$mediaXML = simplexml_load_file($network.':'.$plex_port.$mediaKey);
+				$type = $mediaXML->Video['type'];
+				echo '<div class="thumbnail">';
+				$i++; // Increment i every pass through the array
+				if ($type == "movie"):
+					// Build information for a movie
+					$movieArt = $mediaXML->Video['thumb'];
+					$movieTitle = $mediaXML->Video['title'];
+					$duration = $plexSessionXML->Video[$i-1]['duration'];
+					$viewOffset = $plexSessionXML->Video[$i-1]['viewOffset'];
+					$progress = sprintf('%.0f',($viewOffset / $duration) * 100);
+					$user = $plexSessionXML->Video[$i-1]->User['title'];
+					$device = $plexSessionXML->Video[$i-1]->Player['title'];
+					$state = $plexSessionXML->Video[$i-1]->Player['state'];
+					// Truncate movie summary if it's more than 50 words
+					if (countWords($mediaXML->Video['summary']) < 51):
+						$movieSummary = $mediaXML->Video['summary'];
+					else:
+						$movieSummary = limitWords($mediaXML->Video['summary'],50); // Limit to 50 words
+						$movieSummary .= "..."; // Add ellipsis
+					endif;
+					echo '<img src="plex.php?img='.urlencode($network.':'.$plex_port.$movieArt).'" alt="'.$movieTitle.'">';
+					// Make now playing progress bar
+					//echo 'div id="now-playing-progress-bar">';
+					echo '<div class="progress now-playing-progress-bar">';
+					echo '<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="'.$progress.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$progress.'%">';
+					echo '</div>';
+					echo '</div>';
+					echo '<div class="caption">';
+					//echo '<h2 class="exoextralight">'.$movieTitle.'</h2>';
+					echo '<p class="exolight" style="margin-top:5px;">'.$movieSummary.'</p>';
+					if ($state == "playing"):
+						// Show the playing icon
+						echo '<span class="glyphicon glyphicon-play"></span>';
+					else:
+						echo '<span class="glyphicon glyphicon-pause"></span>';
+					endif;
+					if ($user == ""):
+						echo '<p class="exolight">'.$device.'</p>';
+					else:
+						echo '<p class="exolight">'.$user.'</p>';
+					endif;
 				else:
-					$movieSummary = limitWords($mediaXML->Video['summary'],50); // Limit to 50 words
-					$movieSummary .= "..."; // Add ellipsis
-				endif;
-				echo '<img src="plex.php?img='.urlencode($network.':'.$plex_port.$movieArt).'" alt="'.$movieTitle.'">';
-				// Make now playing progress bar
-				//echo 'div id="now-playing-progress-bar">';
-				echo '<div class="progress now-playing-progress-bar">';
-				echo '<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="'.$progress.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$progress.'%">';
-				echo '</div>';
-				echo '</div>';
-				echo '<div class="caption">';
-				//echo '<h2 class="exoextralight">'.$movieTitle.'</h2>';
-				echo '<p class="exolight" style="margin-top:5px;">'.$movieSummary.'</p>';
-				if ($state == "playing"):
-					// Show the playing icon
-					echo '<span class="glyphicon glyphicon-play"></span>';
-				else:
-					echo '<span class="glyphicon glyphicon-pause"></span>';
-				endif;
-				if ($user == ""):
-					echo '<p class="exolight">'.$device.'</p>';
-				else:
-					echo '<p class="exolight">'.$user.'</p>';
-				endif;
-			else:
-				// Build information for a tv show
-				$tvArt = $mediaXML->Video['grandparentThumb'];
-				$showTitle = $mediaXML->Video['grandparentTitle'];
-				$episodeTitle = $mediaXML->Video['title'];
-				$episodeSummary = $mediaXML->Video['summary'];
-				$episodeSeason = $mediaXML->Video['parentIndex'];
-				$episodeNumber = $mediaXML->Video['index'];
-				$duration = $plexSessionXML->Video[$i-1]['duration'];
-				$viewOffset = $plexSessionXML->Video[$i-1]['viewOffset'];
-				$progress = sprintf('%.0f',($viewOffset / $duration) * 100);
-				$user = $plexSessionXML->Video[$i-1]->User['title'];
-				$device = $plexSessionXML->Video[$i-1]->Player['title'];
-				$state = $plexSessionXML->Video[$i-1]->Player['state'];
-				//echo '<div class="img-overlay">';
-				echo '<img src="plex.php?img='.urlencode($network.':'.$plex_port.$tvArt).'" alt="'.$showTitle.'">';
-				// Make now playing progress bar
-				//echo 'div id="now-playing-progress-bar">';
-				echo '<div class="progress now-playing-progress-bar">';
-				echo '<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="'.$progress.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$progress.'%">';
-				echo '</div>';
-				echo '</div>';
-				//echo '</div>';
-				// Make description below thumbnail
-				echo '<div class="caption">';
-				//echo '<h2 class="exoextralight">'.$showTitle.'</h2>';
-				echo '<h3 class="exoextralight" style="margin-top:5px;">Season '.$episodeSeason.'</h3>';
-				echo '<h4 class="exoextralight" style="margin-top:5px;">E'.$episodeNumber.' - '.$episodeTitle.'</h4>';
-				// Truncate episode summary if it's more than 50 words
-				if (countWords($mediaXML->Video['summary']) < 51):
+					// Build information for a tv show
+					$tvArt = $mediaXML->Video['grandparentThumb'];
+					$showTitle = $mediaXML->Video['grandparentTitle'];
+					$episodeTitle = $mediaXML->Video['title'];
 					$episodeSummary = $mediaXML->Video['summary'];
-				else:
-					$episodeSummary = limitWords($mediaXML->Video['summary'],50); // Limit to 50 words
-					$episodeSummary .= "..."; // Add ellipsis
+					$episodeSeason = $mediaXML->Video['parentIndex'];
+					$episodeNumber = $mediaXML->Video['index'];
+					$duration = $plexSessionXML->Video[$i-1]['duration'];
+					$viewOffset = $plexSessionXML->Video[$i-1]['viewOffset'];
+					$progress = sprintf('%.0f',($viewOffset / $duration) * 100);
+					$user = $plexSessionXML->Video[$i-1]->User['title'];
+					$device = $plexSessionXML->Video[$i-1]->Player['title'];
+					$state = $plexSessionXML->Video[$i-1]->Player['state'];
+					//echo '<div class="img-overlay">';
+					echo '<img src="plex.php?img='.urlencode($network.':'.$plex_port.$tvArt).'" alt="'.$showTitle.'">';
+					// Make now playing progress bar
+					//echo 'div id="now-playing-progress-bar">';
+					echo '<div class="progress now-playing-progress-bar">';
+					echo '<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="'.$progress.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$progress.'%">';
+					echo '</div>';
+					echo '</div>';
+					//echo '</div>';
+					// Make description below thumbnail
+					echo '<div class="caption">';
+					//echo '<h2 class="exoextralight">'.$showTitle.'</h2>';
+					echo '<h3 class="exoextralight" style="margin-top:5px;">Season '.$episodeSeason.'</h3>';
+					echo '<h4 class="exoextralight" style="margin-top:5px;">E'.$episodeNumber.' - '.$episodeTitle.'</h4>';
+					// Truncate episode summary if it's more than 50 words
+					if (countWords($mediaXML->Video['summary']) < 51):
+						$episodeSummary = $mediaXML->Video['summary'];
+					else:
+						$episodeSummary = limitWords($mediaXML->Video['summary'],50); // Limit to 50 words
+						$episodeSummary .= "..."; // Add ellipsis
+					endif;
+					echo '<p class="exolight">'.$episodeSummary.'</p>';
+					if ($state == "playing"):
+						// Show the playing icon
+						echo '<span class="glyphicon glyphicon-play"></span>';
+					else:
+						echo '<span class="glyphicon glyphicon-pause"></span>';
+					endif;
+					if ($user == ""):
+						echo '<p class="exolight">'.$device.'</p>';
+					else:
+						echo '<p class="exolight">'.$user.'</p>';
+					endif;
 				endif;
-				echo '<p class="exolight">'.$episodeSummary.'</p>';
-				if ($state == "playing"):
-					// Show the playing icon
-					echo '<span class="glyphicon glyphicon-play"></span>';
+				// Action buttons if we ever want to do something with them.
+				//echo '<p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn btn-default">Action</a></p>';
+				echo "</div>";
+				echo "</div>";
+				// Should we make <hr>? Only if there is more than one video and it's not the last thumbnail created.
+				if (($i > 0) && ($i < $t)):
+					echo '<hr>';
 				else:
-					echo '<span class="glyphicon glyphicon-pause"></span>';
+					// Do nothing
 				endif;
-				if ($user == ""):
-					echo '<p class="exolight">'.$device.'</p>';
-				else:
-					echo '<p class="exolight">'.$user.'</p>';
-				endif;
-			endif;
-			// Action buttons if we ever want to do something with them.
-			//echo '<p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn btn-default">Action</a></p>';
-			echo "</div>";
-			echo "</div>";
-			// Should we make <hr>? Only if there is more than one video and it's not the last thumbnail created.
-			if (($i > 0) && ($i < $t)):
-				echo '<hr>';
-			else:
-				// Do nothing
-			endif;
-		endforeach;
-		echo '</div>';
-	endif;
+			endforeach;
+			echo '</div>';
+		endif;
+	}
 }
 
 function getTranscodeSessions()
 {
-	global $plex_port;
-	$network = getNetwork();
-	$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
-
-	if (count($plexSessionXML->Video) > 0):
-		$i = 0; // i is the variable that gets iterated each pass through the array
-		$t = 0; // t is the total amount of sessions
-		$transcodeSessions = 0; // this is the number of active transcodes
-		foreach ($plexSessionXML->Video as $sessionInfo):
-			$t++;
-		endforeach;
-		foreach ($plexSessionXML->Video as $sessionInfo):
-			if ($sessionInfo->TranscodeSession['videoDecision'] == 'transcode') {
-				$transcodeSessions++;
-			};
-			$i++; // Increment i every pass through the array
-		endforeach;
-		return $transcodeSessions;
-	endif;
-    return 0;
+	global $plex_instances;
+	foreach ($plex_instances as $instance) {
+		
+		$plex_port = $instance[1];
+		$network = getNetwork($instance[3]);
+		$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
+	
+		if (count($plexSessionXML->Video) > 0):
+			$i = 0; // i is the variable that gets iterated each pass through the array
+			$t = 0; // t is the total amount of sessions
+			$transcodeSessions = 0; // this is the number of active transcodes
+			foreach ($plexSessionXML->Video as $sessionInfo):
+				$t++;
+			endforeach;
+			foreach ($plexSessionXML->Video as $sessionInfo):
+				if ($sessionInfo->TranscodeSession['videoDecision'] == 'transcode') {
+					$transcodeSessions++;
+				};
+				$i++; // Increment i every pass through the array
+			endforeach;
+			return $transcodeSessions;
+		endif;
+	    return 0;
+	}
 }
 
 function makeBandwidthBars($interface)

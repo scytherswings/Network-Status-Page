@@ -73,3 +73,4 @@ Designed to monitor a local server and network with forecast.io, Plex, and pfSen
 ---------------
 * To configure the location of your config.ini script, edit the path to the directory of the config.ini file that is set in /assets/php/functions.php
 * You should put the config.ini file outside your web root directory to limit access.
+* Don't forget to allow logins to plex from the network that you will host this server on.

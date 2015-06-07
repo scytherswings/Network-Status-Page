@@ -73,3 +73,5 @@ Designed to monitor a local server and network with forecast.io, Plex, and pfSen
 ---------------
 * To configure the location of your config.ini script, edit the path to the directory of the config.ini file that is set in /assets/php/functions.php
 * You should put the config.ini file outside your web root directory to limit access.
+* Create the caches folder under the assets folder. I might make a deployment script to handle things like config files and folder creation.
+	* the path should be something like: /var/www/html/assets/caches

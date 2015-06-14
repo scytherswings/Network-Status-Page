@@ -19,9 +19,7 @@ Designed to monitor a local server and network with forecast.io, Plex, and pfSen
 
 * Uses jQuery to provide near real time feedback
 
-* Optimized for Apple devices  `Tested on OS X 10.9/10.10 and iOS 7/8`
-
-* Also tested on Ubuntu 14.04 LTS
+* Optimized for Apple devices  `Tested on OS X 10.9/10.10 and iOS 7/8, Ubuntu 14.04 LTS`
 
 * Displays the following:
 	* currently playing items from Plex Media Server

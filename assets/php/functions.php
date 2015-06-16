@@ -43,6 +43,31 @@ $volume_names[] = $config['storage']['volume_name'];
 $volume_paths[] = $config['storage']['volume_path'];
 
 
+//This is a new attempt at using objects to track different services
+/*
+global $services;
+
+function add_service($instances) {
+	global $services;
+	
+	foreach ($instances as $instance) {
+		$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance)[2],array_values($instance)[3]);
+		$services[] = $temp_object;
+	}
+}
+	
+foreach ($service_instances as $service_instance) {
+	add_service($service_instance);
+}
+*/
+
+
+
+
+
+
+
+
 // Services
 $pfSense_config_lines = 6;
 $plex_config_lines = 6;

@@ -756,7 +756,7 @@ function makeRecenlyReleased()
 		$network = getNetwork($instance[3]);
 		$clientIP = get_client_ip();
 		// Various items are commented out as I was playing with what information to include.
-		$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/3/newest'); //the number relates to how many libraries you have..i think..
+		$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/3/newest'); //the number relates to how many libraries you have. I'll need to make an addition to the config file.
 		
 		//echo '<div class="col-md-10 col-sm-offset-1">';
 		echo '<div class="col-md-12">';

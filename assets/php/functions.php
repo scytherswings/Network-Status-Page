@@ -60,6 +60,7 @@ foreach ($service_instances as $service_instance) {
 	add_service($service_instance);
 }
 */
+//print_r(array_values($config['plex']['server_name']));
 
 
 

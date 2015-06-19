@@ -30,7 +30,9 @@ $weather_name = $config['weather']['weather_name'];
 $forecast_api = $config['weather']['forecast_api'];
 
 // Misc
-$trakt_username = $config['misc']['trakt_username'];
+//$trakt_username = $config['misc']['trakt_username'];
+//$trakt_api_key = $config['misc']['trakt_api_key'];
+//$trakt_redirect_url = $config['misc']['trakt_redirect_url'];
 if (isset($config['misc']['cpu_cores'])) {
 	$cpu_cores = $config['misc']['cpu_cores'];
 }
@@ -71,7 +73,7 @@ if (isset($config['pfSense'])) {
 	$pfSense_config_line_count = (count($config['pfSense'], COUNT_RECURSIVE) - $pfSense_config_lines);
 	if ($pfSense_config_line_count >= $pfSense_config_lines){
 		for ($i=1; $i <= $pfSense_config_line_count; $i++) {
-			$num = ceil($i/$pfSense_config_lines);
+			$num = ceil($i/$pfSense_config_lines); //this is checking to make sure there are only x number of config lines.... it is probably a really dumb way to do this.
 			$pfSense_instances[$num][0] = $config['pfSense']['server_name'][$num];
 			$pfSense_instances[$num][1] = $config['pfSense']['local_port'][$num];
 			$pfSense_instances[$num][2] = $config['pfSense']['URL'][$num];
@@ -711,11 +713,11 @@ function makeRecenlyViewed()
 		$network = getNetwork($instance[3]);
 		$clientIP = get_client_ip();
 		$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
-		$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
+/*		$trakt_url = 'http://trakt.tv/users/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
 		$traktThumb = 'assets/caches/thumbnails/all-tvthumb.jpg';
-	
+        callTraktAPI();
 		echo '<div class="col-md-12">';
-		echo '<a href="http://trakt.tv/user/'.$trakt_username.'" class="thumbnail">';
+		echo '<a href="http://trakt.tv/users/'.$trakt_username.'" class="thumbnail">';
 		if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
 			// Trakt image is less than 15 minutes old.
 			// Don't refresh the image, just use the file as-is.
@@ -735,7 +737,7 @@ function makeRecenlyViewed()
 	
 			}
 		}
-		/*
+		*/
 		// This checks to see if you are inside your local network. If you are it gives you the forecast as well.
 		if($clientIP != getNetwork($clientIP) && count($plexSessionXML->Video) == 0) {
 			echo '<hr>';
@@ -744,9 +746,44 @@ function makeRecenlyViewed()
 			echo '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat='.$weather_lat.'&lon='.$weather_long.'&name='.$weather_name.'"> </iframe>';
 		}
 		echo '</div>';
-		*/
+
 	}
 }
+/*
+function callTraktAPI()
+{
+    global $trakt_api_key;
+    global $trakt_username;
+    echo $trakt_api_key;
+    echo $trakt_username;
+    $trakt_api_url = 'https://api-v2launch.trakt.tv/users/'.$trakt_username;
+    $trakt_call['https']['method'] = 'GET';
+    $trakt_call['https']['header'] = "Content-type: application/json\r\n";
+    $trakt_call['https']['header'] .= "trakt-api-key: ".$trakt_api_key."\r\n";
+    $trakt_call['https']['header'] .= "trakt-api-version: 2\r\n";
+    $trakt_call['https']['header']
+    $context = stream_context_create($trakt_call);
+    $contents = file_get_contents($trakt_api_url, false, $context);
+    echo $contents;
+
+    $request = new HttpRequest();
+    $request->setUrl('https://api-v2launch.trakt.tv/users/scytherswings');
+    $request->setMethod(HTTP_METH_GET);
+
+    $request->setHeaders(array(
+        'trakt-api-version' => '2',
+        'trakt-api-key' => 'c70dbe0b15d57f97e7baad16024ba0fd32a26ba9531a938f3b893d03e026b742',
+        'content-type' => 'application/json'
+    ));
+
+    try {
+        $response = $request->send();
+
+        echo $response->getBody();
+    } catch (HttpException $ex) {
+        echo $ex;
+    }
+}*/
 
 function makeRecenlyReleased()
 {
@@ -756,7 +793,7 @@ function makeRecenlyReleased()
 		$network = getNetwork($instance[3]);
 		$clientIP = get_client_ip();
 		// Various items are commented out as I was playing with what information to include.
-		$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/3/newest'); //the number relates to how many libraries you have..i think..
+		$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/1/newest'); //the number relates to how many libraries you have..i think..
 		
 		//echo '<div class="col-md-10 col-sm-offset-1">';
 		echo '<div class="col-md-12">';

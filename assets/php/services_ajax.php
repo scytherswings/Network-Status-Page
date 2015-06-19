@@ -41,22 +41,15 @@ $services = array(
 	//new serviceMinecraft("Bevo Tech Pack", 25565, "http://minecraft.d4rk.co")
 );
 */
+
+//I'm experimenting with using objects to track services in funcitons.php
+
 global $services;
 
 function add_service($instances) {
 	global $services;
 	
 	foreach ($instances as $instance) {
-        /*
-        echo " instance var 0 ".$instance[0];
-        echo " instance var 1 ".$instance[1];
-        echo " instance var 2 ".$instance[2];
-        echo " instance var 3 ".$instance[3];
-        echo " instance var 4 ".$instance[4];
-        echo " instance var 4 ".$instance[5];
-        echo " instance var 4 ".$instance[6];
-        echo " instance var 4 ".$instance[7];
-        */
 		$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance)[2],array_values($instance)[3]);
 		$services[] = $temp_object;
 	}
@@ -65,6 +58,7 @@ function add_service($instances) {
 foreach ($service_instances as $service_instance) {
 	add_service($service_instance);
 }
+
 
 ?>
 <table class="center">

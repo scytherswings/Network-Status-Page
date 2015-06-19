@@ -45,6 +45,32 @@ $volume_names[] = $config['storage']['volume_name'];
 $volume_paths[] = $config['storage']['volume_path'];
 
 
+//This is a new attempt at using objects to track different services
+/*
+global $services;
+
+function add_service($instances) {
+	global $services;
+	
+	foreach ($instances as $instance) {
+		$temp_object = new service(array_values($instance)[0],array_values($instance)[1],array_values($instance)[2],array_values($instance)[3]);
+		$services[] = $temp_object;
+	}
+}
+	
+foreach ($service_instances as $service_instance) {
+	add_service($service_instance);
+}
+*/
+//print_r(array_values($config['plex']['server_name']));
+
+
+
+
+
+
+
+
 // Services
 $pfSense_config_lines = 6;
 $plex_config_lines = 6;
@@ -793,7 +819,9 @@ function makeRecenlyReleased()
 		$network = getNetwork($instance[3]);
 		$clientIP = get_client_ip();
 		// Various items are commented out as I was playing with what information to include.
+
 		$plexNewestXML = simplexml_load_file($network.':'.$plex_port.'/library/sections/1/newest'); //the number relates to how many libraries you have..i think..
+
 		
 		//echo '<div class="col-md-10 col-sm-offset-1">';
 		echo '<div class="col-md-12">';

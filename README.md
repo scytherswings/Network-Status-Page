@@ -3,6 +3,7 @@ Network Status Page - 0.2.5
 
 Designed to monitor a local server and network with forecast.io, Plex, and pfSense integration.
 
+Original Project:
 [Live site][ls]
 
 [Plex forum thread][pft]
@@ -18,8 +19,6 @@ Designed to monitor a local server and network with forecast.io, Plex, and pfSen
 * Designed using [Bootstrap 3][bs]
 
 * Uses jQuery to provide near real time feedback
-
-* Optimized for Apple devices  `Tested on OS X 10.9/10.10 and iOS 7/8, Ubuntu 14.04 LTS`
 
 * Displays the following:
 	* currently playing items from Plex Media Server

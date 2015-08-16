@@ -2,7 +2,7 @@
 
 
 // You should move the config.ini outside the web directory.
-$config_path = "/opt/config/config.ini"; // Path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
+$config_file_path = "/opt/config/config.ini"; // Path to config file, replace the expression after the "=" sign. Don't forget to leave the ";" at the end of the line. You should place it outside of web root
 // Don't forget to make sure this is set properly...
 
 
@@ -12,7 +12,11 @@ include 'init.php';
 include 'lib/phpseclib0.3.5/Net/SSH2.php';
 require_once 'MinecraftServerStatus.class.php';
 
-$config = parse_ini_file($config_path, true);
+if (!file_exists ($config_file_path)) {
+    $config_file_path = "../../config.ini";
+}
+
+$config = parse_ini_file($config_file_path, true);
 
 // Import variables from config file
 // Network Details

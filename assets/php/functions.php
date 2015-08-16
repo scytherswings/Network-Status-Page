@@ -32,6 +32,7 @@ $weather_lat = $config['weather']['weather_lat'];
 $weather_long = $config['weather']['weather_long'];
 $weather_name = $config['weather']['weather_name'];
 $forecast_api = $config['weather']['forecast_api'];
+$weather_units = $config['weather']['weather_units'];
 
 // Misc
 //$trakt_username = $config['misc']['trakt_username'];
@@ -1165,7 +1166,13 @@ function makeWeatherSidebar()
 	global $forecast_api;
 	global $weather_lat;
 	global $weather_long;
+    global $weather_units;
+    $wind_speed_units = "mph";
 	$forecastExcludes = '?exclude=flags'; // Take a look at https://developer.forecast.io/docs/v2 to configure your weather information.
+    if (strtoupper($weather_units) == "C") {
+        $forecastExcludes = "?exclude=flags&units=ca";
+        $wind_speed_units = "km/h";
+    }
 	$currentForecast = json_decode(file_get_contents('https://api.forecast.io/forecast/'.$forecast_api.'/'.$weather_lat.','.$weather_long.$forecastExcludes));
 
 	$currentSummary = $currentForecast->currently->summary;
@@ -1230,7 +1237,7 @@ function makeWeatherSidebar()
 	echo '</ul>';
 	if ($currentWindSpeed > 0) {
 		$direction = getWindDir($currentWindBearing);
-		echo '<h4 class="exoextralight" style="margin-top:0px">Wind: '.$currentWindSpeed.' mph from the '.$direction.'</h4>';
+		echo '<h4 class="exoextralight" style="margin-top:0px">Wind: '.$currentWindSpeed.' '.$wind_speed_units.' from the '.$direction.'</h4>';
 	} else {
 		echo '<h4 class="exoextralight" style="margin-top:0px">Wind: Calm</h4>';
 	}

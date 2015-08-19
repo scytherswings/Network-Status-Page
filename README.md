@@ -1,4 +1,4 @@
-Network Status Page - 0.2.5
+Network Status Page - 0.2.6
 ===================
 
 Designed to monitor a local server and network with forecast.io, Plex, and pfSense integration.

@@ -10,6 +10,7 @@ $config_file_path = "/opt/config/config.ini"; // Path to config file, replace th
 Ini_Set( 'display_errors', false);
 include 'init.php';
 include 'lib/phpseclib0.3.5/Net/SSH2.php';
+include("service.class.php");
 require_once 'MinecraftServerStatus.class.php';
 
 if (!file_exists ($config_file_path)) {
@@ -105,12 +106,13 @@ if (isset($config['pfSense'])) {
 	if ($pfSense_config_line_count >= $pfSense_config_lines){
 		for ($i=1; $i <= $pfSense_config_line_count; $i++) {
 			$num = ceil($i/$pfSense_config_lines); //this is checking to make sure there are only x number of config lines.... it is probably a really dumb way to do this.
-			$pfSense_instances[$num][0] = $config['pfSense']['server_name'][$num];
-			$pfSense_instances[$num][1] = $config['pfSense']['local_port'][$num];
-			$pfSense_instances[$num][2] = $config['pfSense']['URL'][$num];
-			$pfSense_instances[$num][3] = $config['pfSense']['local_ip'][$num];
-			$pfSense_instances[$num][4] = $config['pfSense']['username'][$num];
-			$pfSense_instances[$num][5] = $config['pfSense']['password'][$num];
+			$pfSense_instances = new service(
+				$config['pfSense']['server_name'][$num],
+				$config['pfSense']['local_port'][$num],
+				$config['pfSense']['URL'][$num],
+				$config['pfSense']['local_ip'][$num],
+				$config['pfSense']['username'][$num],
+				$config['pfSense']['password'][$num]);
 		}
 	}
 	else {

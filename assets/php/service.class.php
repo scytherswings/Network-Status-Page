@@ -1,16 +1,23 @@
 <?php
 class service
 {
-	public $name;
+	public $service_name;
 	public $port;
 	public $url;
 	public $host;
 	public $status;
-	
-	function __construct($name, $port, $url = '', $host)
+	public $username;
+	public $password;
+	public $api;
+	public $sabSpeedLimitMax;
+	public $sabSpeedLimitMin;
+	public $ping_throttle;
+
+
+	function __construct($service_name, $port, $url = '', $host)
 	{
 
-		$this->name = $name;
+		$this->service_name = $service_name;
 		$this->port = $port;
 		$this->url = $url;
 		$this->host = $host;

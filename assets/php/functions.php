@@ -496,36 +496,12 @@ function getDiskspace($dir)
 	return sprintf('%.0f',($du / $dt) * 100);
 }
 
-function getDiskspaceErebor($dir)
-{
-	$df = disk_free_space($dir);
-	$dt = disk_total_space($dir);
-	$du = $dt - $df;
-	return sprintf('%.0f',($du / $GLOBALS['ereborTotalSpace']) * 100);
-}
-
 function getDiskspaceUsed($dir)
 {
 	$df = disk_free_space($dir);
 	$dt = disk_total_space($dir);
 	$du = $dt - $df;
 	return $du;
-}
-
-function getDiskspaceTV1($dir)
-{
-	$df = disk_free_space($dir);
-	$dt = disk_total_space($dir);
-	$du = $dt - $df;
-	return sprintf('%.0f',($du / $GLOBALS['televisionTotalSpace']) * 100);
-}
-
-function getDiskspaceTV2($dir)
-{
-	$df = disk_free_space($dir);
-	$dt = disk_total_space($dir);
-	$du = $dt - $df;
-	return sprintf('%.0f',($du / $GLOBALS['television2TotalSpace']) * 100);
 }
 
 function getLoad($id)

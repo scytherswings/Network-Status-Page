@@ -12,6 +12,10 @@ Original Project:
 [pft]: http://forums.plexapp.com/index.php/topic/84856-network-status-page/
 
 
+I'm going to concentrate on this project much less as I plan to make a new project using Ruby on Rails. It will be a while before my new project reaches feature parity so this should work for the time being.
+Here's the new project page:
+[ls]: https://github.com/scytherswings/Plex-Board
+
 ###Features
 ---------------
 * Responsive web design viewable on desktop, tablet and mobile web browsers 

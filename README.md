@@ -1,6 +1,8 @@
 Network Status Page - 0.2.6
 ===================
 
+[![Join the chat at https://gitter.im/scytherswings/Network-Status-Page](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scytherswings/Network-Status-Page?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Designed to monitor a local server and network with forecast.io, Plex, and pfSense integration.
 
 Original Project:

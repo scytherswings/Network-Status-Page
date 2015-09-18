@@ -3,7 +3,7 @@ Network Status Page - 0.2.6
 
 Designed to monitor a local server and network with forecast.io, Plex, and pfSense integration.
 
-Original Project:
+Original Project: (The live site might be dead :( )
 [Live site][ls]
 
 [Plex forum thread][pft]
@@ -11,6 +11,7 @@ Original Project:
 [ls]: http://d4rk.co/
 [pft]: http://forums.plexapp.com/index.php/topic/84856-network-status-page/
 
+As a suggestion from another GitHub user, I have created some Gitter chat rooms for my projects, here is the link for this one: [Gitter Plex-Board](https://gitter.im/scytherswings/Network-Status-Page)
 
 I'm going to concentrate on this project much less as I plan to make a new project using Ruby on Rails. It will be a while before my new project reaches feature parity so this should work for the time being.
 

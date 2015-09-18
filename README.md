@@ -11,7 +11,9 @@ Original Project: (The live site might be dead :( )
 [ls]: http://d4rk.co/
 [pft]: http://forums.plexapp.com/index.php/topic/84856-network-status-page/
 
-As a suggestion from another GitHub user, I have created some Gitter chat rooms for my projects, here is the link for this one: [Gitter Plex-Board](https://gitter.im/scytherswings/Network-Status-Page)
+As a suggestion from another GitHub user, I have created some Gitter chat rooms for my projects, here is the link for this one:
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scytherswings/Network-Status-Page?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 
 I'm going to concentrate on this project much less as I plan to make a new project using Ruby on Rails. It will be a while before my new project reaches feature parity so this should work for the time being.
 

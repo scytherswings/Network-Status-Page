@@ -705,7 +705,7 @@ function sabSpeedAdjuster()
 		endif;
 }
 
-function makeRecenlyViewed()
+function makeRecentlyViewed()
 {
 	//global $pfSense_ip;
 	//global $plex_port;

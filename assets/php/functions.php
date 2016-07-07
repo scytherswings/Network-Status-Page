@@ -792,7 +792,7 @@ function callTraktAPI()
     }
 }*/
 
-function makeRecenlyReleased()
+function makeRecentlyReleased()
 {
     global $plex_instances;
 	foreach ($plex_instances as $instance) {
@@ -859,9 +859,9 @@ function makeNowPlaying()
 		$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
 	
 		if (!$plexSessionXML):
-			makeRecenlyViewed();
+			makeRecentlyViewed();
 		elseif (count($plexSessionXML->Video) == 0):
-			makeRecenlyReleased();
+			makeRecentlyReleased();
 		else:
 			$i = 0; // Initiate and assign a value to i & t
 			$t = 0; // T is the total amount of sessions

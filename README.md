@@ -18,8 +18,7 @@ As a suggestion from another GitHub user, I have created some Gitter chat rooms 
 I'm going to concentrate on this project much less as I plan to make a new project using Ruby on Rails. It will be a while before my new project reaches feature parity so this should work for the time being.
 
 Here's the new project page:
-[Plex-Board]
-[Plex-Board]: https://github.com/scytherswings/Plex-Board
+[Plex-Board](https://github.com/scytherswings/Plex-Board)
 
 ###Features
 ---------------
